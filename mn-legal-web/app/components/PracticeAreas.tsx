@@ -11,33 +11,45 @@ gsap.registerPlugin(ScrollTrigger);
 const practices = [
   {
     id: '01',
-    title: 'Corporate & Commercial Law',
-    description: 'Comprehensive legal counsel for business formation, mergers, acquisitions, and regulatory compliance in Kenya and East Africa.',
+    slug: 'data-privacy',
+    title: 'Data Privacy & Protection',
+    description: 'Specialized legal counsel for Data Protection Act 2019 compliance, DPIAs, and AI governance in East Africa.',
   },
   {
     id: '02',
+    slug: 'corporate-commercial',
+    title: 'Corporate & Commercial Law',
+    description: 'Comprehensive legal counsel for business formation, mergers, acquisitions, and regulatory compliance in Kenya.',
+  },
+  {
+    id: '03',
+    slug: 'litigation-dispute-resolution',
     title: 'Litigation & Dispute Resolution',
     description: 'Strategic representation in high-stakes commercial litigation, arbitration, and mediation across all superior courts.',
   },
   {
-    id: '03',
+    id: '04',
+    slug: 'conveyancing-property',
     title: 'Conveyancing & Property Law',
     description: 'Expert handling of real estate transactions, property development, leases, and land use planning matters.',
   },
   {
-    id: '04',
-    title: 'Employment & Labour Law',
-    description: 'Advisory services on employment contracts, workplace policies, restructuring, and dispute resolution.',
-  },
-  {
     id: '05',
+    slug: 'intellectual-property',
     title: 'Intellectual Property',
     description: 'Protection and enforcement of trademarks, patents, copyrights, and trade secrets for innovative businesses.',
   },
   {
     id: '06',
-    title: 'Banking & Finance Law',
+    slug: 'banking-finance-fintech',
+    title: 'Banking, Finance & Fintech Law',
     description: 'Legal support for secured lending, project finance, fintech regulation, and capital markets transactions.',
+  },
+  {
+    id: '07',
+    slug: 'employment-labour',
+    title: 'Employment & Labour Law',
+    description: 'Advisory services on employment contracts, workplace policies, restructuring, and dispute resolution.',
   },
 ];
 
@@ -81,7 +93,7 @@ export default function PracticeAreas() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[1px] bg-[rgba(139,28,63,0.1)] border border-[rgba(139,28,63,0.1)]">
-          {practices.map((practice: any) => (
+          {practices.map((practice) => (
             <div
               key={practice.title}
               className="practice-card bg-[var(--bg-primary)] p-10 md:p-12 hover:bg-[var(--mn-cream)] transition-all duration-400 group relative overflow-hidden"
@@ -99,7 +111,7 @@ export default function PracticeAreas() {
               </p>
               
               <Link
-                href="#"
+                href={`/practice-areas/${practice.slug}`}
                 className="inline-flex items-center text-[13px] uppercase font-semibold text-[var(--mn-burgundy)] tracking-widest group/link"
               >
                 Learn More

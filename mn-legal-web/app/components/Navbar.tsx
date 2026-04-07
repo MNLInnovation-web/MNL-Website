@@ -37,7 +37,7 @@ export default function Navbar() {
         scrolled ? 'p-[12px_60px] bg-[rgba(26,39,68,0.98)] backdrop-blur-[20px] border-b border-[rgba(139,28,63,0.14)]' : 'p-[20px_60px] bg-transparent'
       }`}
     >
-      <Link href="/" className="nav-brand relative transition-transform duration-500 hover:scale-105 bg-white p-2 inline-flex items-center">
+      <Link href="/" className="nav-brand relative transition-transform duration-500 hover:scale-105 bg-white p-2 inline-flex items-center rounded-lg shadow-sm hover:shadow-md border border-gray-50">
         <div className="relative w-[180px] h-[45px]">
           <Image 
             src="https://wp.mnlegal.net/wp-content/uploads/2021/11/MNL-ADVOCATES-LLP-MN-LEGAL-x2.png"

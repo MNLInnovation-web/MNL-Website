@@ -3,25 +3,30 @@ import { Resend } from 'resend';
 import { z } from 'zod';
 
 const contactFormSchema = z.object({
-  fullName: z.string().min(2, "Name is too short").max(100),
+  fullName: z.string().min(1, "Full name is required").max(100),
   email: z.string().email("Invalid email address"),
-  matterType: z.enum(["Corporate & Commercial", "Litigation", "Conveyancing", "Intellectual Property", "Other"]),
-  summary: z.string().min(10, "Summary must be at least 10 characters").max(2000),
+  matterType: z.string().min(1, "Legal matter type is required"),
+  summary: z.string().min(1, "Summary is required").max(5000),
   honeypot: z.string().optional(),
 });
 
 // Initialize safely for build time
-const resendKey = process.env.RESEND_API_KEY || 're_123'; 
+const resendKey = process.env.RESEND_API_KEY || 're_123';
 const resend = new Resend(resendKey);
 
 export async function POST(req: NextRequest) {
   try {
-    const body = await req.json();
-    
+    let body;
+    try {
+      body = await req.json();
+    } catch {
+      return NextResponse.json({ error: 'Invalid request body' }, { status: 400 });
+    }
+
     // ── SERVER-SIDE VALIDATION (Zod) ──
     const result = contactFormSchema.safeParse(body);
     if (!result.success) {
-      return NextResponse.json({ error: result.error.errors[0].message }, { status: 400 });
+      return NextResponse.json({ error: result.error.errors[0]?.message || 'Validation error' }, { status: 400 });
     }
 
     const { fullName, email, matterType, summary, honeypot } = result.data;
@@ -31,17 +36,16 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ success: true }, { status: 200 });
     }
 
-    // Check for API key at runtime before sending
-    if (!process.env.RESEND_API_KEY) {
-        console.error('RESEND_API_KEY is missing in environment variables');
-        return NextResponse.json({ error: 'Server configuration error.' }, { status: 500 });
+    // Check for API key and Info Email at runtime before sending
+    if (!process.env.RESEND_API_KEY || !process.env.INFO_EMAIL) {
+      console.error('RESEND_API_KEY or INFO_EMAIL is missing in environment variables');
+      return NextResponse.json({ error: 'Server configuration error.' }, { status: 500 });
     }
 
     // ── SEND EMAIL ──
     const { data, error } = await resend.emails.send({
       from: 'MN Legal Portal <onboarding@resend.dev>',
-      // NOTE: In Resend Trial Mode, this MUST be the email you used to sign up for Resend.
-      to: ['info@mnlegal.net'], 
+      to: [process.env.INFO_EMAIL],
       subject: `CONSULTATION INQUIRY: ${matterType.toUpperCase()} - ${fullName.toUpperCase()}`,
       replyTo: email,
       html: `

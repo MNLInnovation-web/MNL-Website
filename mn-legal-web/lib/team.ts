@@ -60,6 +60,12 @@ export const teamMembers: TeamMember[] = [
     name: 'Keziah Mwangi',
     title: 'HRM and Tax Associate',
     practice: 'Human Resources & Taxation',
-    image: 'https://wp.mnlegal.net/wp-content/uploads/2026/03/Keziah.jpg',
+    image: 'https://wp.mnlegal.net/wp-content/uploads/2026/04/keziah-scaled.jpeg',
+  },
+  {
+    name: 'Nahashon Ian Muhari',
+    title: 'Digital Marketing & Communications Lead',
+    practice: 'Brand Strategy + Social Media Management',
+    image: 'https://wp.mnlegal.net/wp-content/uploads/2026/04/Nahashon.jpeg',
   },
 ];

@@ -2,6 +2,12 @@
 
 import { useState } from 'react';
 
+declare global {
+  interface Window {
+    gtag: (...args: unknown[]) => void;
+  }
+}
+
 export default function ContactSection() {
   const [formData, setFormData] = useState({
     fullName: '',
@@ -37,6 +43,12 @@ export default function ContactSection() {
       }
 
       setStatus('success');
+      if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+        window.gtag('event', 'generate_lead', {
+          event_category: 'Contact Form',
+          matter_type: formData.matterType,
+        });
+      }
       setFormData({
         fullName: '',
         email: '',

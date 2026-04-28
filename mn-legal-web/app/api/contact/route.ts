@@ -10,6 +10,311 @@ const contactFormSchema = z.object({
   honeypot: z.string().optional(),
 });
 
+function firmNotificationHtml(fullName: string, email: string, matterType: string, summary: string): string {
+  const timestamp = new Date().toLocaleString('en-GB', {
+    day: 'numeric', month: 'long', year: 'numeric',
+    hour: '2-digit', minute: '2-digit', timeZoneName: 'short'
+  });
+
+  return `<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>New Consultation Inquiry</title>
+</head>
+<body style="margin:0;padding:0;background-color:#f0ede8;font-family:Arial,Helvetica,sans-serif;">
+
+  <!-- Outer wrapper -->
+  <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="background-color:#f0ede8;padding:40px 16px;">
+    <tr>
+      <td align="center">
+
+        <!-- Email card -->
+        <table role="presentation" cellpadding="0" cellspacing="0" width="600" style="max-width:600px;width:100%;background-color:#ffffff;">
+
+          <!-- Burgundy accent bar -->
+          <tr>
+            <td style="height:7px;background-color:#8b1c3f;font-size:0;line-height:0;">&nbsp;</td>
+          </tr>
+
+          <!-- Header -->
+          <tr>
+            <td style="background-color:#1a2744;padding:44px 48px 40px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                  <td>
+                    <p style="margin:0 0 6px 0;font-family:Georgia,'Times New Roman',serif;font-size:26px;font-style:italic;font-weight:400;color:#ffffff;line-height:1.2;">MN Advocates LLP</p>
+                    <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#8b9fc0;">Nairobi · Kenya</p>
+                  </td>
+                  <td align="right" valign="top">
+                    <table role="presentation" cellpadding="0" cellspacing="0">
+                      <tr>
+                        <td style="background-color:#8b1c3f;padding:6px 14px;">
+                          <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:8px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#ffffff;">New Inquiry</p>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Thin rule -->
+              <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin-top:28px;">
+                <tr><td style="height:1px;background-color:#2d3e5f;font-size:0;line-height:0;">&nbsp;</td></tr>
+              </table>
+
+              <p style="margin:20px 0 0 0;font-family:Arial,Helvetica,sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#6b7ea0;">Received: ${timestamp}</p>
+            </td>
+          </tr>
+
+          <!-- Content -->
+          <tr>
+            <td style="padding:48px 48px 40px;">
+
+              <!-- Section label -->
+              <p style="margin:0 0 28px 0;font-family:Arial,Helvetica,sans-serif;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#8b1c3f;">Client Details</p>
+
+              <!-- Name field -->
+              <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom:24px;">
+                <tr>
+                  <td style="border-bottom:1px solid #ede9e2;padding-bottom:20px;">
+                    <p style="margin:0 0 6px 0;font-family:Arial,Helvetica,sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#8b1c3f;">Full Name</p>
+                    <p style="margin:0;font-family:Georgia,'Times New Roman',serif;font-size:20px;font-weight:400;color:#1a2744;line-height:1.3;">${fullName}</p>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Email field -->
+              <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom:24px;">
+                <tr>
+                  <td style="border-bottom:1px solid #ede9e2;padding-bottom:20px;">
+                    <p style="margin:0 0 6px 0;font-family:Arial,Helvetica,sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#8b1c3f;">Email Address</p>
+                    <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:16px;font-weight:400;color:#1a2744;">${email}</p>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Legal area field -->
+              <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom:36px;">
+                <tr>
+                  <td>
+                    <p style="margin:0 0 6px 0;font-family:Arial,Helvetica,sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#8b1c3f;">Legal Area</p>
+                    <table role="presentation" cellpadding="0" cellspacing="0">
+                      <tr>
+                        <td style="background-color:#1a2744;padding:8px 18px;">
+                          <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#ffffff;">${matterType}</p>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Divider -->
+              <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom:36px;">
+                <tr><td style="height:1px;background-color:#ede9e2;font-size:0;line-height:0;">&nbsp;</td></tr>
+              </table>
+
+              <!-- Inquiry summary -->
+              <p style="margin:0 0 16px 0;font-family:Arial,Helvetica,sans-serif;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#8b1c3f;">Inquiry Summary</p>
+              <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom:40px;">
+                <tr>
+                  <td style="background-color:#f5f3ef;border-left:4px solid #8b1c3f;padding:24px 28px;">
+                    <p style="margin:0;font-family:Georgia,'Times New Roman',serif;font-size:16px;font-style:italic;color:#333333;line-height:1.8;">&ldquo;${summary}&rdquo;</p>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- CTA button -->
+              <table role="presentation" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="background-color:#8b1c3f;">
+                    <a href="mailto:${email}?subject=RE: Your Consultation Inquiry — ${matterType}" style="display:block;padding:16px 36px;font-family:Arial,Helvetica,sans-serif;font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#ffffff;text-decoration:none;">Reply to Client</a>
+                  </td>
+                </tr>
+              </table>
+
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="background-color:#f5f3ef;padding:24px 48px;border-top:1px solid #ede9e2;">
+              <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                  <td>
+                    <p style="margin:0 0 4px 0;font-family:Arial,Helvetica,sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#8b1c3f;">MN Advocates LLP</p>
+                    <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:11px;color:#999999;">Global Center, 1st Floor, CBC Building · Off Argwings Kodhek Road, Kilimani · Nairobi, Kenya</p>
+                  </td>
+                  <td align="right" valign="middle">
+                    <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#bbbbbb;">Privileged &amp; Confidential</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Bottom burgundy bar -->
+          <tr>
+            <td style="height:4px;background-color:#8b1c3f;font-size:0;line-height:0;">&nbsp;</td>
+          </tr>
+
+        </table>
+        <!-- /Email card -->
+
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>`;
+}
+
+function clientConfirmationHtml(fullName: string, matterType: string, summary: string): string {
+  const firstName = fullName.split(' ')[0];
+
+  return `<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Inquiry Received — MN Advocates LLP</title>
+</head>
+<body style="margin:0;padding:0;background-color:#1a2744;font-family:Arial,Helvetica,sans-serif;">
+
+  <!-- Outer wrapper -->
+  <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="background-color:#1a2744;padding:48px 16px;">
+    <tr>
+      <td align="center">
+
+        <!-- Email card -->
+        <table role="presentation" cellpadding="0" cellspacing="0" width="600" style="max-width:600px;width:100%;background-color:#ffffff;">
+
+          <!-- Burgundy accent bar -->
+          <tr>
+            <td style="height:7px;background-color:#8b1c3f;font-size:0;line-height:0;">&nbsp;</td>
+          </tr>
+
+          <!-- Header -->
+          <tr>
+            <td style="background-color:#1a2744;padding:52px 52px 48px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                  <td>
+                    <!-- Monogram mark -->
+                    <table role="presentation" cellpadding="0" cellspacing="0" style="margin-bottom:28px;">
+                      <tr>
+                        <td style="width:40px;height:40px;background-color:#8b1c3f;text-align:center;vertical-align:middle;">
+                          <span style="font-family:Georgia,'Times New Roman',serif;font-size:18px;font-style:italic;color:#ffffff;font-weight:400;">M</span>
+                        </td>
+                        <td style="width:8px;">&nbsp;</td>
+                        <td>
+                          <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:8px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#8b9fc0;line-height:1;">MN Advocates LLP</p>
+                          <p style="margin:2px 0 0 0;font-family:Arial,Helvetica,sans-serif;font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:#4a5f80;">Nairobi · Kenya</p>
+                        </td>
+                      </tr>
+                    </table>
+
+                    <p style="margin:0 0 12px 0;font-family:Georgia,'Times New Roman',serif;font-size:32px;font-style:italic;font-weight:400;color:#ffffff;line-height:1.2;">Inquiry Received.</p>
+                    <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:400;color:#8b9fc0;line-height:1.6;max-width:400px;">Your consultation request has been transmitted to our partners. We will respond within <strong style="color:#ffffff;font-weight:600;">24 business hours.</strong></p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- White content -->
+          <tr>
+            <td style="padding:52px 52px 44px;background-color:#ffffff;">
+
+              <!-- Greeting -->
+              <p style="margin:0 0 24px 0;font-family:Georgia,'Times New Roman',serif;font-size:22px;font-style:italic;color:#1a2744;line-height:1.3;">Dear ${firstName},</p>
+              <p style="margin:0 0 36px 0;font-family:Arial,Helvetica,sans-serif;font-size:15px;color:#555555;line-height:1.8;">Thank you for reaching out to MN Advocates LLP. We have received your request for a consultation and our team has been notified. A qualified advocate will be in contact with you shortly to discuss your matter in confidence.</p>
+
+              <!-- Matter summary box -->
+              <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom:40px;">
+                <tr>
+                  <td style="background-color:#f5f3ef;border-left:4px solid #8b1c3f;padding:28px 32px;">
+                    <p style="margin:0 0 16px 0;font-family:Arial,Helvetica,sans-serif;font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#8b1c3f;">Your Matter on Record</p>
+
+                    <p style="margin:0 0 6px 0;font-family:Arial,Helvetica,sans-serif;font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#999999;">Legal Area</p>
+                    <p style="margin:0 0 20px 0;font-family:Arial,Helvetica,sans-serif;font-size:14px;font-weight:600;color:#1a2744;">${matterType}</p>
+
+                    <p style="margin:0 0 6px 0;font-family:Arial,Helvetica,sans-serif;font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#999999;">Your Summary</p>
+                    <p style="margin:0;font-family:Georgia,'Times New Roman',serif;font-size:14px;font-style:italic;color:#555555;line-height:1.75;">&ldquo;${summary}&rdquo;</p>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Divider -->
+              <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom:36px;">
+                <tr><td style="height:1px;background-color:#ede9e2;font-size:0;line-height:0;">&nbsp;</td></tr>
+              </table>
+
+              <!-- Urgent contact -->
+              <p style="margin:0 0 20px 0;font-family:Arial,Helvetica,sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#1a2744;">For Urgent Matters</p>
+
+              <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                  <td width="50%" valign="top" style="padding-right:16px;">
+                    <p style="margin:0 0 4px 0;font-family:Arial,Helvetica,sans-serif;font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#999999;">Email</p>
+                    <a href="mailto:info@mnlegal.net" style="font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:600;color:#8b1c3f;text-decoration:none;">info@mnlegal.net</a>
+                  </td>
+                  <td width="50%" valign="top">
+                    <p style="margin:0 0 4px 0;font-family:Arial,Helvetica,sans-serif;font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#999999;">Phone</p>
+                    <a href="tel:+254700325089" style="font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:600;color:#8b1c3f;text-decoration:none;">+254 700 325 089</a>
+                  </td>
+                </tr>
+              </table>
+
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="background-color:#131d33;padding:28px 52px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                  <td valign="middle">
+                    <p style="margin:0 0 5px 0;font-family:Arial,Helvetica,sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#8b1c3f;">MN Advocates LLP</p>
+                    <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:10px;color:#4a5f80;line-height:1.6;">Global Center, 1st Floor, CBC Building<br>Off Argwings Kodhek Road, Kilimani · Nairobi</p>
+                  </td>
+                  <td align="right" valign="middle">
+                    <p style="margin:0 0 8px 0;font-family:Arial,Helvetica,sans-serif;font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#2d3e5f;">Connect</p>
+                    <a href="https://www.linkedin.com/company/mn-legal" style="font-family:Arial,Helvetica,sans-serif;font-size:10px;color:#4a5f80;text-decoration:none;display:block;margin-bottom:4px;">LinkedIn</a>
+                    <a href="https://twitter.com/mnlegaladvocate" style="font-family:Arial,Helvetica,sans-serif;font-size:10px;color:#4a5f80;text-decoration:none;display:block;">Twitter / X</a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Confidentiality strip -->
+          <tr>
+            <td style="background-color:#1a2744;padding:14px 52px;border-top:1px solid #2d3e5f;">
+              <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:9px;color:#3a4f6a;text-align:center;letter-spacing:1px;">This communication is privileged and confidential. It is intended solely for the named recipient.</p>
+            </td>
+          </tr>
+
+          <!-- Bottom burgundy bar -->
+          <tr>
+            <td style="height:4px;background-color:#8b1c3f;font-size:0;line-height:0;">&nbsp;</td>
+          </tr>
+
+        </table>
+        <!-- /Email card -->
+
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>`;
+}
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
@@ -35,61 +340,13 @@ export async function POST(req: NextRequest) {
 
     const resend = new Resend(process.env.RESEND_API_KEY);
 
-    // ── SEND EMAIL ──
+    // ── FIRM NOTIFICATION ──
     const { data, error } = await resend.emails.send({
       from: 'MN Legal Portal <noreply@mnlegal.net>',
       to: ['info@mnlegal.net'],
-      subject: `CONSULTATION INQUIRY: ${matterType.toUpperCase()} - ${fullName.toUpperCase()}`,
+      subject: `New Inquiry: ${matterType} — ${fullName}`,
       replyTo: email,
-      html: `
-        <!DOCTYPE html>
-        <html>
-          <head>
-            <meta charset="utf-8">
-            <style>
-              body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; color: #333333; line-height: 1.6; margin: 0; padding: 0; background-color: #f5f3ef; }
-              .container { max-width: 600px; margin: 40px auto; background-color: #ffffff; border-top: 6px solid #8b1c3f; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-              .header { background-color: #1a2744; padding: 40px; text-align: center; }
-              .content { padding: 40px; }
-              .footer { background-color: #f9f9f9; padding: 20px; text-align: center; font-size: 11px; color: #999; text-transform: uppercase; letter-spacing: 2px; }
-              h1 { font-family: 'Georgia', serif; font-style: italic; color: #ffffff; margin: 0; font-size: 24px; }
-              .label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #8b1c3f; margin-bottom: 8px; display: block; }
-              .value { font-size: 16px; color: #1a2744; margin-bottom: 24px; font-weight: 500; }
-              .message-box { background-color: #f5f3ef; padding: 30px; border-left: 2px solid #8b1c3f; margin-top: 30px; }
-              .message-text { font-size: 15px; color: #333333; white-space: pre-wrap; font-style: italic; }
-              .divider { height: 1px; background-color: #eeeeee; margin: 30px 0; }
-            </style>
-          </head>
-          <body>
-            <div class="container">
-              <div class="header">
-                <h1>MN Advocates LLP</h1>
-                <div style="color: rgba(255,255,255,0.4); font-size: 9px; letter-spacing: 3px; text-transform: uppercase; margin-top: 10px;">Consultation Request</div>
-              </div>
-              <div class="content">
-                <span class="label">Prospective Client</span>
-                <div class="value">${fullName}</div>
-                
-                <span class="label">Email Address</span>
-                <div class="value">${email}</div>
-                
-                <span class="label">Legal Area</span>
-                <div class="value">${matterType}</div>
-                
-                <div class="divider"></div>
-                
-                <div class="message-box">
-                  <span class="label">Inquiry Summary</span>
-                  <div class="message-text">"${summary}"</div>
-                </div>
-              </div>
-              <div class="footer">
-                Privileged & Confidential - Generated via MN Legal Portal
-              </div>
-            </div>
-          </body>
-        </html>
-      `,
+      html: firmNotificationHtml(fullName, email, matterType, summary),
     });
 
     if (error) {
@@ -97,67 +354,13 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: `Resend: ${error.message || JSON.stringify(error)}` }, { status: 500 });
     }
 
-    // ── CONFIRMATION EMAIL TO SUBMITTER ──
+    // ── CLIENT CONFIRMATION ──
     await resend.emails.send({
-      from: 'MN Legal Portal <noreply@mnlegal.net>',
+      from: 'MN Advocates LLP <noreply@mnlegal.net>',
       to: [email],
       replyTo: 'info@mnlegal.net',
-      subject: `We've received your inquiry — MN Advocates LLP`,
-      html: `
-        <!DOCTYPE html>
-        <html>
-          <head>
-            <meta charset="utf-8">
-            <style>
-              body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; color: #333333; line-height: 1.6; margin: 0; padding: 0; background-color: #f5f3ef; }
-              .container { max-width: 600px; margin: 40px auto; background-color: #ffffff; border-top: 6px solid #8b1c3f; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-              .header { background-color: #1a2744; padding: 40px; text-align: center; }
-              .content { padding: 40px; }
-              .footer { background-color: #f9f9f9; padding: 20px; text-align: center; font-size: 11px; color: #999; text-transform: uppercase; letter-spacing: 2px; }
-              h1 { font-family: 'Georgia', serif; font-style: italic; color: #ffffff; margin: 0; font-size: 24px; }
-              h2 { font-family: 'Georgia', serif; font-style: italic; color: #1a2744; font-size: 20px; margin: 0 0 16px; }
-              .label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #8b1c3f; margin-bottom: 6px; display: block; }
-              .value { font-size: 15px; color: #1a2744; margin-bottom: 20px; font-weight: 500; }
-              .highlight-box { background-color: #f5f3ef; padding: 28px 30px; border-left: 3px solid #8b1c3f; margin: 28px 0; }
-              .contact-row { display: flex; gap: 40px; margin-top: 24px; }
-              .contact-item { font-size: 13px; color: #555; }
-              .contact-item a { color: #8b1c3f; text-decoration: none; font-weight: 600; }
-              .divider { height: 1px; background-color: #eeeeee; margin: 28px 0; }
-              p { font-size: 15px; color: #444; margin: 0 0 16px; }
-            </style>
-          </head>
-          <body>
-            <div class="container">
-              <div class="header">
-                <h1>MN Advocates LLP</h1>
-                <div style="color: rgba(255,255,255,0.4); font-size: 9px; letter-spacing: 3px; text-transform: uppercase; margin-top: 10px;">Inquiry Received</div>
-              </div>
-              <div class="content">
-                <h2>Thank you, ${fullName}.</h2>
-                <p>We have received your consultation request and our partners have been notified. A member of our team will be in touch within <strong>24 business hours</strong>.</p>
-
-                <div class="highlight-box">
-                  <span class="label">Legal Area</span>
-                  <div class="value">${matterType}</div>
-                  <span class="label">Your Summary</span>
-                  <div class="value" style="font-style: italic; color: #555;">"${summary}"</div>
-                </div>
-
-                <div class="divider"></div>
-
-                <p style="font-size: 13px; color: #777;">If your matter is urgent, please contact us directly:</p>
-                <div style="margin-top: 8px;">
-                  <div style="font-size: 13px; color: #555; margin-bottom: 8px;">Email: <a href="mailto:info@mnlegal.net" style="color: #8b1c3f; text-decoration: none; font-weight: 600;">info@mnlegal.net</a></div>
-                  <div style="font-size: 13px; color: #555;">Phone: <a href="tel:+254700325089" style="color: #8b1c3f; text-decoration: none; font-weight: 600;">+254 700 325 089</a></div>
-                </div>
-              </div>
-              <div class="footer">
-                Privileged & Confidential · MN Advocates LLP · Nairobi, Kenya
-              </div>
-            </div>
-          </body>
-        </html>
-      `,
+      subject: `Your inquiry has been received — MN Advocates LLP`,
+      html: clientConfirmationHtml(fullName, matterType, summary),
     });
 
     return NextResponse.json({ success: true, data }, { status: 200 });

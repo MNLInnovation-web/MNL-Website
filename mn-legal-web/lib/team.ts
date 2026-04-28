@@ -13,12 +13,14 @@ export const teamMembers: TeamMember[] = [
     title: 'Founder & Managing Partner',
     practice: 'Corporate Commercial Law and International Business Strategy',
     image: 'https://wp.mnlegal.net/wp-content/uploads/2024/01/Mbula-Nzuki-team.jpg',
+    linkedIn: 'https://www.linkedin.com/in/mbulanzuki/',
   },
   {
     name: 'Sebie Salim',
     title: 'Chief Operations, Strategy & Growth',
     practice: 'Operational Excellence',
     image: 'https://wp.mnlegal.net/wp-content/uploads/2024/01/Sebie-Salim.jpg',
+    linkedIn: 'https://www.linkedin.com/in/sebie/',
   },
   {
     name: 'Mutundu Chege',
@@ -31,12 +33,14 @@ export const teamMembers: TeamMember[] = [
     title: 'Of Counsel - London 🇬🇧',
     practice: 'Maritime and Commercial Law + International Arbitration',
     image: 'https://wp.mnlegal.net/wp-content/uploads/2026/01/IMG_8790.jpeg',
+    linkedIn: 'https://www.linkedin.com/in/konstantina-zariou-aciarb/',
   },
   {
     name: 'Husna (A.) Mohammed',
     title: 'Senior Associate',
     practice: 'Corporate Commercial + Real Estate Law',
     image: 'https://wp.mnlegal.net/wp-content/uploads/2026/03/1771405050567.jpg',
+    linkedIn: 'https://www.linkedin.com/in/husna-mohammed-94686317b/',
   },
   {
     name: 'Zachary Ongeri',
@@ -49,23 +53,27 @@ export const teamMembers: TeamMember[] = [
     title: 'Associate',
     practice: 'Commercial Law & International Arbitration',
     image: 'https://wp.mnlegal.net/wp-content/uploads/2024/01/Nour-Sheriff.jpg',
+    linkedIn: 'https://www.linkedin.com/in/nour-sherif-%E4%B9%90-%E6%98%8E-7a59b6118/',
   },
   {
     name: 'Tyrus Muya Kamau',
     title: 'Head of Cybersecurity',
     practice: 'Cybersecurity & Digital Forensics',
     image: 'https://wp.mnlegal.net/wp-content/uploads/2026/03/Tyrus-Muya-Kamau.jpg.jpeg',
+    linkedIn: 'https://www.linkedin.com/in/tyruskamau/',
   },
   {
     name: 'Keziah Mwangi',
     title: 'HRM and Tax Associate',
     practice: 'Human Resources & Taxation',
     image: 'https://wp.mnlegal.net/wp-content/uploads/2026/04/IMG_3394.JPG-1-scaled.jpeg',
+    linkedIn: 'https://www.linkedin.com/in/keziah-mwangi/',
   },
   {
     name: 'Nahashon Ian Muhari',
     title: 'Digital Marketing & Communications Lead',
     practice: 'Brand Strategy + Social Media Management',
     image: 'https://wp.mnlegal.net/wp-content/uploads/2026/04/Nahashon.jpeg',
+    linkedIn: 'https://www.linkedin.com/in/nahashon-muhari-474a0628b/',
   },
 ];

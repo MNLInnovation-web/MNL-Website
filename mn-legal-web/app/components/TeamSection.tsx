@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Linkedin } from 'lucide-react';
 import { teamMembers, TeamMember } from '@/lib/team';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -31,9 +32,23 @@ function TeamMemberCard({ member, index }: { member: TeamMember; index: number }
         <span className="block text-[10px] uppercase text-[var(--mn-burgundy)] tracking-[2.5px] font-bold mb-3">
           {member.title}
         </span>
-        <p className="text-[13px] text-[var(--text-secondary)] font-medium tracking-wide">
-          {member.practice}
-        </p>
+        <div className="flex items-center justify-between gap-3">
+          <p className="text-[13px] text-[var(--text-secondary)] font-medium tracking-wide">
+            {member.practice}
+          </p>
+          {member.linkedIn && (
+            <a
+              href={member.linkedIn}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${member.name} on LinkedIn`}
+              className="flex-shrink-0 w-7 h-7 flex items-center justify-center border border-[var(--mn-gray-light)] text-[var(--text-secondary)] hover:border-[#0A66C2] hover:text-[#0A66C2] hover:bg-[#0A66C2]/5 transition-all duration-300"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <Linkedin size={13} strokeWidth={1.8} />
+            </a>
+          )}
+        </div>
       </div>
 
       {/* Decorative Corner Element */}

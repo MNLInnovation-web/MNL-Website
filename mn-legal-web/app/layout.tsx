@@ -101,6 +101,91 @@ export default function RootLayout({
             gtag('config', 'G-3NYD2MRHRL');
           `}
         </Script>
+
+        {/* Structured Data — LegalService + Organization (appears on every page) */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": "LegalService",
+                  "@id": "https://mnlegal.net/#legalservice",
+                  "name": "MN Legal",
+                  "alternateName": "MN Advocates LLP",
+                  "url": "https://mnlegal.net",
+                  "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://mnlegal.net/og-image.jpg",
+                    "width": 1200,
+                    "height": 630
+                  },
+                  "telephone": "+254700325089",
+                  "email": "info@mnlegal.net",
+                  "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "Global Center, 1st Floor, CBC Building, Off Argwings Kodhek Road, Kilimani",
+                    "addressLocality": "Nairobi",
+                    "addressRegion": "Nairobi County",
+                    "addressCountry": "KE"
+                  },
+                  "areaServed": [
+                    { "@type": "Country", "name": "Kenya" },
+                    { "@type": "Place", "name": "East Africa" }
+                  ],
+                  "serviceType": [
+                    "Data Privacy & Protection Law",
+                    "Corporate & Commercial Law",
+                    "Litigation & Dispute Resolution",
+                    "Conveyancing & Property Law",
+                    "Intellectual Property Law",
+                    "Banking, Finance & Fintech Law",
+                    "Employment & Labour Law"
+                  ],
+                  "openingHoursSpecification": {
+                    "@type": "OpeningHoursSpecification",
+                    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                    "opens": "08:00",
+                    "closes": "17:00"
+                  },
+                  "priceRange": "$$",
+                  "sameAs": [
+                    "https://www.linkedin.com/company/mn-legal",
+                    "https://twitter.com/mnlegaladvocate",
+                    "https://www.instagram.com/mnlegaladvocates/"
+                  ]
+                },
+                {
+                  "@type": "Organization",
+                  "@id": "https://mnlegal.net/#organization",
+                  "name": "MN Advocates LLP",
+                  "url": "https://mnlegal.net",
+                  "logo": "https://mnlegal.net/og-image.jpg",
+                  "foundingLocation": { "@type": "Place", "name": "Nairobi, Kenya" },
+                  "employee": [
+                    { "@type": "Person", "name": "Mbula Nzuki", "jobTitle": "Founder & Managing Partner", "sameAs": "https://www.linkedin.com/in/mbulanzuki/", "worksFor": { "@id": "https://mnlegal.net/#organization" } },
+                    { "@type": "Person", "name": "Sebie Salim", "jobTitle": "Chief Operations, Strategy & Growth", "sameAs": "https://www.linkedin.com/in/sebie/", "worksFor": { "@id": "https://mnlegal.net/#organization" } },
+                    { "@type": "Person", "name": "Mutundu Chege", "jobTitle": "Litigation Department, Co-Head", "worksFor": { "@id": "https://mnlegal.net/#organization" } },
+                    { "@type": "Person", "name": "Konstantina Zariou", "jobTitle": "Of Counsel - London", "sameAs": "https://www.linkedin.com/in/konstantina-zariou-aciarb/", "worksFor": { "@id": "https://mnlegal.net/#organization" } },
+                    { "@type": "Person", "name": "Husna Mohammed", "jobTitle": "Senior Associate", "sameAs": "https://www.linkedin.com/in/husna-mohammed-94686317b/", "worksFor": { "@id": "https://mnlegal.net/#organization" } },
+                    { "@type": "Person", "name": "Zachary Ongeri", "jobTitle": "AI & Digital Transformation Associate", "worksFor": { "@id": "https://mnlegal.net/#organization" } },
+                    { "@type": "Person", "name": "Nour Sheriff", "jobTitle": "Associate", "sameAs": "https://www.linkedin.com/in/nour-sherif-%E4%B9%90-%E6%98%8E-7a59b6118/", "worksFor": { "@id": "https://mnlegal.net/#organization" } },
+                    { "@type": "Person", "name": "Tyrus Muya Kamau", "jobTitle": "Head of Cybersecurity", "sameAs": "https://www.linkedin.com/in/tyruskamau/", "worksFor": { "@id": "https://mnlegal.net/#organization" } },
+                    { "@type": "Person", "name": "Keziah Mwangi", "jobTitle": "HRM and Tax Associate", "sameAs": "https://www.linkedin.com/in/keziah-mwangi/", "worksFor": { "@id": "https://mnlegal.net/#organization" } },
+                    { "@type": "Person", "name": "Nahashon Ian Muhari", "jobTitle": "Digital Marketing & Communications Lead", "sameAs": "https://www.linkedin.com/in/nahashon-muhari-474a0628b/", "worksFor": { "@id": "https://mnlegal.net/#organization" } }
+                  ],
+                  "sameAs": [
+                    "https://www.linkedin.com/company/mn-legal",
+                    "https://twitter.com/mnlegaladvocate",
+                    "https://www.instagram.com/mnlegaladvocates/"
+                  ]
+                }
+              ]
+            })
+          }}
+        />
+
         <ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light" enableSystem={false}>
           <SmoothScroll />
           {children}

@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -12,6 +13,43 @@ import { mapWPPostToPost } from '@/lib/mapper';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
+}
+
+export async function generateStaticParams() {
+  const posts = await getAllPosts();
+  return posts.map((post: any) => ({ slug: post.slug }));
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const wpPost = await getPostBySlug(slug);
+
+  if (!wpPost) return { title: 'Article Not Found' };
+
+  const post = mapWPPostToPost(wpPost);
+  const imageUrl = wpPost.featuredImage?.node?.sourceUrl || '/og-image.jpg';
+  const excerpt = post.excerpt?.substring(0, 160) || post.title;
+
+  return {
+    title: post.title,
+    description: excerpt,
+    alternates: { canonical: `/insights/${slug}` },
+    openGraph: {
+      title: post.title,
+      description: excerpt,
+      url: `https://mnlegal.net/insights/${slug}`,
+      type: 'article',
+      publishedTime: wpPost.date,
+      authors: [post.author.name],
+      images: [{ url: imageUrl, width: 1200, height: 630, alt: post.title }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: excerpt,
+      images: [imageUrl],
+    },
+  };
 }
 
 export default async function SingleArticle({ params }: PageProps) {
@@ -38,6 +76,44 @@ export default async function SingleArticle({ params }: PageProps) {
 
   return (
     <main className="relative bg-[var(--bg-primary)]">
+      {/* Article structured data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([
+            {
+              "@context": "https://schema.org",
+              "@type": "Article",
+              "headline": post.title,
+              "description": post.excerpt || post.title,
+              "image": post.image,
+              "datePublished": wpPost.date,
+              "dateModified": wpPost.date,
+              "author": {
+                "@type": "Person",
+                "name": post.author.name,
+                "worksFor": { "@id": "https://mnlegal.net/#organization" }
+              },
+              "publisher": {
+                "@type": "Organization",
+                "name": "MN Legal",
+                "logo": { "@type": "ImageObject", "url": "https://mnlegal.net/og-image.jpg" }
+              },
+              "mainEntityOfPage": { "@type": "WebPage", "@id": `https://mnlegal.net/insights/${post.slug}` }
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mnlegal.net" },
+                { "@type": "ListItem", "position": 2, "name": "Insights", "item": "https://mnlegal.net/insights" },
+                { "@type": "ListItem", "position": 3, "name": post.category, "item": `https://mnlegal.net/insights?category=${post.category.toLowerCase().replace(/\s+/g, '-')}` },
+                { "@type": "ListItem", "position": 4, "name": post.title, "item": `https://mnlegal.net/insights/${post.slug}` }
+              ]
+            }
+          ])
+        }}
+      />
       <UIExtras />
       <Navbar />
 

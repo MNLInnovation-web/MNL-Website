@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "wp-audit": "node scripts/wp-manager.js --action audit-geo",
+    "wp-publish": "node scripts/wp-manager.js --action publish"
   },
   "dependencies": {
     "gsap": "^3.14.2",

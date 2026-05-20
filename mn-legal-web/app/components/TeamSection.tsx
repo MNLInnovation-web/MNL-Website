@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Linkedin } from 'lucide-react';
@@ -12,7 +13,7 @@ gsap.registerPlugin(ScrollTrigger);
 function TeamMemberCard({ member, index }: { member: TeamMember; index: number }) {
   return (
     <div className="team-card group bg-[var(--bg-primary)] p-4 transition-all duration-500 hover:shadow-2xl relative border border-transparent hover:border-[var(--mn-cream-dark)]">
-      <div className="relative aspect-[4/5] mb-8 overflow-hidden bg-[var(--mn-cream)]">
+      <Link href={`/team/${member.slug}`} className="block relative aspect-[4/5] mb-8 overflow-hidden bg-[var(--mn-cream)] rounded-none">
         <Image
           src={member.image}
           alt={member.name}
@@ -23,11 +24,13 @@ function TeamMemberCard({ member, index }: { member: TeamMember; index: number }
         />
         {/* Cinematic Overlay */}
         <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(26,39,68,0.4),transparent)] opacity-60 group-hover:opacity-0 transition-opacity duration-500"></div>
-      </div>
+      </Link>
       
       <div className="relative pl-5 border-l-0 group-hover:border-l-[3px] border-[var(--mn-burgundy)] transition-all duration-300 ease-out">
         <h3 className="text-[22px] font-display text-[var(--heading-primary)] mb-1 font-semibold leading-tight group-hover:text-[var(--mn-burgundy)] transition-colors duration-300">
-          {member.name}
+          <Link href={`/team/${member.slug}`}>
+            {member.name}
+          </Link>
         </h3>
         <span className="block text-[10px] uppercase text-[var(--mn-burgundy)] tracking-[2.5px] font-bold mb-3">
           {member.title}
@@ -117,7 +120,7 @@ export default function TeamSection() {
 
           {/* Careers Placeholder Card */}
           <div className="team-card group bg-[var(--mn-navy)] p-10 flex flex-col justify-center items-center text-center border border-[rgba(255,255,255,0.05)] transition-all duration-500 hover:bg-[var(--mn-navy-deep)] min-h-[400px]">
-            <div className="w-16 h-16 rounded-full border border-white/10 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500">
+            <div className="w-16 h-16 rounded-none border border-white/10 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500">
                <span className="text-[var(--mn-burgundy)] text-3xl font-display italic">§</span>
             </div>
             <h3 className="text-xl font-display text-white mb-4">Join Our Team</h3>

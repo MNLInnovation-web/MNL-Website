@@ -16,6 +16,7 @@ export interface PracticeArea {
       href: string;
     };
   };
+  leadAttorneySlug: string;
 }
 
 export const practiceAreas: PracticeArea[] = [
@@ -59,7 +60,8 @@ export const practiceAreas: PracticeArea[] = [
         label: 'Read our Deep Dive into the Kenya AI Bill 2026',
         href: '/insights/the-silicon-savannahs-social-contract-a-critical-deep-dive-into-kenyas-artificial-intelligence-bill-2026'
       }
-    }
+    },
+    leadAttorneySlug: 'tyrus-muya-kamau'
   },
   {
     id: '02',
@@ -97,7 +99,8 @@ export const practiceAreas: PracticeArea[] = [
     uniqueAngle: {
       title: 'Investor-Ready Legal Health Checks',
       content: 'We specialize in "investor-ready" legal audits for startups. We identify and fix legal gaps in your IP, contracts, and compliance, making your business more attractive to venture capital and institutional investors.'
-    }
+    },
+    leadAttorneySlug: 'mbula-nzuki'
   },
   {
     id: '03',
@@ -134,7 +137,8 @@ export const practiceAreas: PracticeArea[] = [
     uniqueAngle: {
       title: 'Global Expertise in Arbitration',
       content: 'Our dispute resolution practice is bolstered by international expertise. Our Of Counsel in London, Konstantina Zariou, specializes in International Arbitration, providing our clients with a sophisticated edge in global commercial disputes.'
-    }
+    },
+    leadAttorneySlug: 'mutundu-chege'
   },
   {
     id: '04',
@@ -171,7 +175,8 @@ export const practiceAreas: PracticeArea[] = [
     uniqueAngle: {
       title: 'Speed & Reliability in Real Estate',
       content: 'In the fast-moving real estate market, delays can cost deals. We pride ourselves on our responsiveness and proactive approach, ensuring that your conveyancing matters are processed efficiently without compromising on legal due diligence.'
-    }
+    },
+    leadAttorneySlug: 'husna-mohammed'
   },
   {
     id: '05',
@@ -208,7 +213,8 @@ export const practiceAreas: PracticeArea[] = [
     uniqueAngle: {
       title: 'Leading the Way in AI & IP',
       content: 'The intersection of AI and Intellectual Property is the new frontier. We are one of the few firms in East Africa equipped to handle the unique IP challenges posed by AI-generated content and software-based innovations.'
-    }
+    },
+    leadAttorneySlug: 'zachary-ongeri'
   },
   {
     id: '06',
@@ -251,7 +257,8 @@ export const practiceAreas: PracticeArea[] = [
         label: 'Read our Guide on Kenya\'s VASP Act 2025',
         href: '/insights/kenyas-vasp-act-2025-what-it-means-for-foreign-investors-and-operators'
       }
-    }
+    },
+    leadAttorneySlug: 'mbula-nzuki'
   },
   {
     id: '07',
@@ -287,7 +294,8 @@ export const practiceAreas: PracticeArea[] = [
     uniqueAngle: {
       title: 'Modern Workforce Legalities',
       content: 'The workplace is changing. We provide specialized advice on remote work frameworks, gig economy contracts, and the impact of automation on the modern Kenyan workforce.'
-    }
+    },
+    leadAttorneySlug: 'keziah-mwangi'
   }
 ];
 

@@ -5,12 +5,35 @@ import { z } from 'zod';
 const contactFormSchema = z.object({
   fullName: z.string().min(2, "Name is too short").max(100),
   email: z.string().email("Invalid email address"),
-  matterType: z.enum(["Corporate & Commercial", "Litigation", "Conveyancing", "Intellectual Property", "Other"]),
+  matterType: z.enum([
+    "Corporate & Commercial",
+    "Litigation",
+    "Conveyancing",
+    "Intellectual Property",
+    "Other",
+    "Fintech & Regulation",
+    "Data Privacy & Protection",
+    "Capital Markets & VC",
+    "Corporate Advisory & M&A"
+  ]),
   summary: z.string().min(10, "Summary must be at least 10 characters").max(2000),
   honeypot: z.string().optional(),
+  companyName: z.string().max(100).optional().or(z.literal('')),
+  jobTitle: z.string().max(100).optional().or(z.literal('')),
+  phone: z.string().max(30).optional().or(z.literal('')),
+  contactPreference: z.string().max(50).optional().or(z.literal('')),
 });
 
-function firmNotificationHtml(fullName: string, email: string, matterType: string, summary: string): string {
+function firmNotificationHtml(
+  fullName: string, 
+  email: string, 
+  matterType: string, 
+  summary: string,
+  companyName?: string,
+  jobTitle?: string,
+  phone?: string,
+  contactPreference?: string
+): string {
   const timestamp = new Date().toLocaleString('en-GB', {
     day: 'numeric', month: 'long', year: 'numeric',
     hour: '2-digit', minute: '2-digit', timeZoneName: 'short'
@@ -75,6 +98,33 @@ function firmNotificationHtml(fullName: string, email: string, matterType: strin
 
               <!-- Section label -->
               <p style="margin:0 0 28px 0;font-family:Arial,Helvetica,sans-serif;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#8b1c3f;">Client Details</p>
+
+              <!-- Corporate Background (Render dynamically if present) -->
+              ${companyName || jobTitle ? `
+              <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom:24px;">
+                <tr>
+                  <td style="border-bottom:1px solid #ede9e2;padding-bottom:20px;">
+                    <p style="margin:0 0 6px 0;font-family:Arial,Helvetica,sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#8b1c3f;">Corporate Background</p>
+                    <p style="margin:0;font-family:Georgia,'Times New Roman',serif;font-size:18px;font-weight:400;color:#1a2744;line-height:1.3;">${jobTitle ? `${jobTitle} at ` : ''}${companyName || 'N/A'}</p>
+                  </td>
+                </tr>
+              </table>
+              ` : ''}
+
+              <!-- Contact Preferences (Render dynamically if present) -->
+              ${phone || contactPreference ? `
+              <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom:24px;">
+                <tr>
+                  <td style="border-bottom:1px solid #ede9e2;padding-bottom:20px;">
+                    <p style="margin:0 0 6px 0;font-family:Arial,Helvetica,sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#8b1c3f;">Contact Information</p>
+                    <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:14px;color:#1a2744;line-height:1.5;">
+                      ${phone ? `<strong>Phone / WhatsApp:</strong> ${phone}<br/>` : ''}
+                      ${contactPreference ? `<strong>Channel Preference:</strong> ${contactPreference.toUpperCase()}` : ''}
+                    </p>
+                  </td>
+                </tr>
+              </table>
+              ` : ''}
 
               <!-- Name field -->
               <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom:24px;">
@@ -325,7 +375,17 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: result.error.issues[0].message }, { status: 400 });
     }
 
-    const { fullName, email, matterType, summary, honeypot } = result.data;
+    const { 
+      fullName, 
+      email, 
+      matterType, 
+      summary, 
+      honeypot,
+      companyName,
+      jobTitle,
+      phone,
+      contactPreference
+    } = result.data;
 
     // ── SPAM PROTECTION (Honeypot) ──
     if (honeypot) {
@@ -346,7 +406,7 @@ export async function POST(req: NextRequest) {
       to: ['info@mnlegal.net'],
       subject: `New Inquiry: ${matterType} — ${fullName}`,
       replyTo: email,
-      html: firmNotificationHtml(fullName, email, matterType, summary),
+      html: firmNotificationHtml(fullName, email, matterType, summary, companyName, jobTitle, phone, contactPreference),
     });
 
     if (error) {

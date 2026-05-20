@@ -1,11 +1,12 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { ArrowRight, CheckCircle2, Users2, Lightbulb } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Users2, Lightbulb, Mail, Phone } from 'lucide-react';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import ContactSection from '../../components/ContactSection';
 import { getPracticeAreaBySlug, practiceAreas } from '../../../lib/practice-areas';
+import { teamMembers } from '../../../lib/team';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -30,6 +31,27 @@ export async function generateStaticParams() {
   }));
 }
 
+const getContactMatterType = (slug: string): string => {
+  switch (slug) {
+    case 'data-privacy':
+      return 'Data Privacy & Protection';
+    case 'corporate-commercial':
+      return 'Corporate & Commercial';
+    case 'litigation-dispute-resolution':
+      return 'Litigation';
+    case 'conveyancing-property':
+      return 'Conveyancing';
+    case 'intellectual-property':
+      return 'Intellectual Property';
+    case 'banking-finance-fintech':
+      return 'Fintech & Regulation';
+    case 'employment-labour':
+      return 'Other';
+    default:
+      return 'Other';
+  }
+};
+
 export default async function PracticeAreaPage({ params }: Props) {
   const { slug } = await params;
   const area = getPracticeAreaBySlug(slug);
@@ -38,8 +60,39 @@ export default async function PracticeAreaPage({ params }: Props) {
     notFound();
   }
 
+  const leadAttorney = teamMembers.find(t => t.slug === area.leadAttorneySlug);
+  const defaultMatterType = getContactMatterType(slug);
+  const ctaPrompt = leadAttorney 
+    ? `Connect directly with ${leadAttorney.name} or submit your briefing details below. Our partners are available for urgent corporate and regulatory consultations.`
+    : undefined;
+
+  const schemaJson = {
+    "@context": "https://schema.org",
+    "@type": "LegalService",
+    "@id": `https://www.mnlegal.net/practice-areas/${area.slug}`,
+    "name": area.title,
+    "description": area.description,
+    "url": `https://www.mnlegal.net/practice-areas/${area.slug}`,
+    "telephone": "+254 700 325 089",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Global Center, 1st Floor, CBC Building, Off Argwings Kodhek Road, Kilimani",
+      "addressLocality": "Nairobi",
+      "addressCountry": "KE"
+    },
+    "provider": {
+      "@type": "Organization",
+      "name": "MN Advocates LLP",
+      "url": "https://www.mnlegal.net"
+    }
+  };
+
   return (
     <main className="bg-[var(--bg-primary)] min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaJson) }}
+      />
       <Navbar />
 
       {/* Hero Section */}
@@ -87,9 +140,9 @@ export default async function PracticeAreaPage({ params }: Props) {
               </ul>
             </div>
 
-            {/* Right Column: Who it's for & Unique Angle */}
+            {/* Right Column: Who we serve, Lead Counsel & Unique Angle */}
             <div className="space-y-20">
-              {/* Who it's for */}
+              {/* Who we serve */}
               <div>
                 <div className="flex items-center gap-3 mb-10">
                   <div className="w-10 h-10 rounded-none bg-[var(--mn-burgundy)]/10 flex items-center justify-center">
@@ -110,8 +163,57 @@ export default async function PracticeAreaPage({ params }: Props) {
                 </div>
               </div>
 
+              {/* Lead Counsel Card */}
+              {leadAttorney && (
+                <div className="border border-[var(--mn-burgundy)]/20 bg-white p-8 md:p-10 relative overflow-hidden rounded-none shadow-sm">
+                  <span className="text-[var(--mn-burgundy)] text-[10px] font-bold uppercase tracking-[2px] mb-6 block">
+                    Practice Group Lead
+                  </span>
+                  <div className="flex flex-col sm:flex-row gap-6 items-start sm:items-center mb-6">
+                    <div className="w-24 h-24 relative overflow-hidden bg-[var(--mn-cream)] border border-neutral-100 rounded-none shrink-0">
+                      <img 
+                        src={leadAttorney.image} 
+                        alt={leadAttorney.name}
+                        className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                      />
+                    </div>
+                    <div>
+                      <h3 className="text-[22px] font-display text-[var(--heading-primary)] mb-1 hover:text-[var(--mn-burgundy)] transition-colors">
+                        <Link href={`/team/${leadAttorney.slug}`}>
+                          {leadAttorney.name}
+                        </Link>
+                      </h3>
+                      <p className="text-[12px] uppercase tracking-wider text-neutral-500 font-bold mb-3">
+                        {leadAttorney.title}
+                      </p>
+                      <div className="flex flex-wrap gap-1.5">
+                        {leadAttorney.credentials.slice(0, 2).map((cred, i) => (
+                          <span key={i} className="text-[10px] font-semibold bg-[var(--mn-cream)] text-[var(--mn-burgundy)] px-2.5 py-1 rounded-none border border-[var(--mn-burgundy)]/10">
+                            {cred}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                  <p className="text-[14px] text-neutral-600 leading-relaxed mb-6 font-medium">
+                    {leadAttorney.bio}
+                  </p>
+                  <div className="flex flex-wrap gap-4 pt-6 border-t border-neutral-100">
+                    <a href={`mailto:${leadAttorney.email}`} className="text-[11px] font-bold uppercase tracking-[2px] text-[var(--mn-navy)] hover:text-[var(--mn-burgundy)] transition-colors flex items-center gap-1.5 rounded-none">
+                      <Mail size={12} /> Direct Email
+                    </a>
+                    <a href={`tel:${leadAttorney.phone}`} className="text-[11px] font-bold uppercase tracking-[2px] text-[var(--mn-navy)] hover:text-[var(--mn-burgundy)] transition-colors flex items-center gap-1.5 rounded-none">
+                      <Phone size={12} /> Contact Line
+                    </a>
+                    <Link href={`/team/${leadAttorney.slug}`} className="text-[11px] font-bold uppercase tracking-[2px] text-[var(--mn-burgundy)] hover:underline ml-auto rounded-none">
+                      Full Biography &rarr;
+                    </Link>
+                  </div>
+                </div>
+              )}
+
               {/* Unique Angle Card */}
-              <div className="bg-[var(--mn-burgundy)] p-10 md:p-12 relative overflow-hidden group">
+              <div className="bg-[var(--mn-burgundy)] p-10 md:p-12 relative overflow-hidden group rounded-none">
                 <Lightbulb className="absolute -right-8 -top-8 w-40 h-40 text-white/5 transform -rotate-12 group-hover:scale-110 transition-transform duration-700" />
 
                 <h3 className="text-[24px] font-display text-white italic mb-6 relative z-10">
@@ -138,7 +240,7 @@ export default async function PracticeAreaPage({ params }: Props) {
       </section>
 
       {/* CTA Section */}
-      <ContactSection />
+      <ContactSection defaultMatterType={defaultMatterType} ctaPrompt={ctaPrompt} />
 
       <Footer />
     </main>

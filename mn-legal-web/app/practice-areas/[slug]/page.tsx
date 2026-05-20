@@ -67,7 +67,7 @@ export default async function PracticeAreaPage({ params }: Props) {
             {/* Left Column: What we cover */}
             <div>
               <div className="flex items-center gap-3 mb-10">
-                <div className="w-10 h-10 rounded-full bg-[var(--mn-burgundy)]/10 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-none bg-[var(--mn-burgundy)]/10 flex items-center justify-center">
                   <CheckCircle2 className="text-[var(--mn-burgundy)]" size={20} />
                 </div>
                 <h2 className="text-[28px] font-display text-[var(--heading-primary)]">What we cover</h2>
@@ -92,7 +92,7 @@ export default async function PracticeAreaPage({ params }: Props) {
               {/* Who it's for */}
               <div>
                 <div className="flex items-center gap-3 mb-10">
-                  <div className="w-10 h-10 rounded-full bg-[var(--mn-burgundy)]/10 flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-none bg-[var(--mn-burgundy)]/10 flex items-center justify-center">
                     <Users2 className="text-[var(--mn-burgundy)]" size={20} />
                   </div>
                   <h2 className="text-[28px] font-display text-[var(--heading-primary)]">Who we serve</h2>
@@ -102,7 +102,7 @@ export default async function PracticeAreaPage({ params }: Props) {
                   {area.whoItsFor.map((item, index) => (
                     <span
                       key={index}
-                      className="px-5 py-3 bg-[var(--mn-cream)] border border-[var(--mn-burgundy)]/10 rounded-full text-[14px] font-semibold text-[var(--text-primary)] hover:border-[var(--mn-burgundy)]/30 transition-colors"
+                      className="px-5 py-3 bg-[var(--mn-cream)] border border-[var(--mn-burgundy)]/10 rounded-none text-[14px] font-semibold text-[var(--text-primary)] hover:border-[var(--mn-burgundy)]/30 transition-colors"
                     >
                       {item}
                     </span>

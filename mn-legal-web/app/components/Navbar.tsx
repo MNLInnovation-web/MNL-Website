@@ -28,7 +28,7 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const isDark = scrolled || pathname !== '/';
+  const isTextDark = !scrolled && pathname !== '/';
 
   return (
     <nav 
@@ -37,7 +37,7 @@ export default function Navbar() {
         scrolled ? 'p-[12px_60px] bg-[rgba(26,39,68,0.98)] backdrop-blur-[20px] border-b border-[rgba(139,28,63,0.14)]' : 'p-[20px_60px] bg-transparent'
       }`}
     >
-      <Link href="/" className="nav-brand relative transition-transform duration-500 hover:scale-105 bg-white p-2 inline-flex items-center rounded-lg shadow-sm hover:shadow-md border border-gray-50">
+      <Link href="/" className="nav-brand relative transition-transform duration-500 hover:scale-105 bg-white p-2 inline-flex items-center rounded-none shadow-sm hover:shadow-md border border-gray-50">
         <div className="relative w-[180px] h-[45px]">
           <Image 
             src="https://wp.mnlegal.net/wp-content/uploads/2021/11/MNL-ADVOCATES-LLP-MN-LEGAL-x2.png"
@@ -55,7 +55,7 @@ export default function Navbar() {
             <Link 
               href={href}
               className={`text-[11px] font-medium tracking-[1.2px] uppercase transition-colors duration-300 relative pb-[4px] after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-[1px] after:bg-[var(--mn-burgundy)] after:transition-all after:duration-400 after:ease-[var(--ease-expo)] ${
-                isDark ? 'text-[#1a2744] hover:text-[var(--mn-burgundy)]' : 'text-white/60 hover:text-white'
+                isTextDark ? 'text-[#1a2744] hover:text-[var(--mn-burgundy)]' : 'text-white/60 hover:text-white'
               } after:w-0 hover:after:w-full`}
             >
               {label}
@@ -78,9 +78,9 @@ export default function Navbar() {
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Menu"
         >
-          <span className={`block w-[22px] h-[1.5px] ${isDark ? 'bg-[#1a2744]' : 'bg-white'} transition-all duration-400 ease-[var(--ease-expo)] ${isOpen ? 'translate-y-[6.5px] rotate-45 !bg-white' : ''}`}></span>
-          <span className={`block w-[22px] h-[1.5px] ${isDark ? 'bg-[#1a2744]' : 'bg-white'} transition-opacity duration-300 ${isOpen ? 'opacity-0' : 'opacity-100'}`}></span>
-          <span className={`block w-[22px] h-[1.5px] ${isDark ? 'bg-[#1a2744]' : 'bg-white'} transition-all duration-400 ease-[var(--ease-expo)] ${isOpen ? 'translate-y-[-6.5px] -rotate-45 !bg-white' : ''}`}></span>
+          <span className={`block w-[22px] h-[1.5px] ${isTextDark ? 'bg-[#1a2744]' : 'bg-white'} transition-all duration-400 ease-[var(--ease-expo)] ${isOpen ? 'translate-y-[6.5px] rotate-45 !bg-white' : ''}`}></span>
+          <span className={`block w-[22px] h-[1.5px] ${isTextDark ? 'bg-[#1a2744]' : 'bg-white'} transition-opacity duration-300 ${isOpen ? 'opacity-0' : 'opacity-100'}`}></span>
+          <span className={`block w-[22px] h-[1.5px] ${isTextDark ? 'bg-[#1a2744]' : 'bg-white'} transition-all duration-400 ease-[var(--ease-expo)] ${isOpen ? 'translate-y-[-6.5px] -rotate-45 !bg-white' : ''}`}></span>
         </button>
       </div>
 

@@ -42,6 +42,17 @@ export default function ContactSection() {
         throw new Error(errorData.error || 'Something went wrong. Please try again.');
       }
 
+      // Fire GA4 generate_lead event on successful form submission
+      if (typeof window !== 'undefined' && (window as any).gtag) {
+        (window as any).gtag('event', 'generate_lead', {
+          event_category: 'engagement',
+          event_label: formData.matterType,
+          lead_source: 'contact_form',
+          value: 1.0,
+          currency: 'KES'
+        });
+      }
+
       setStatus('success');
       if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
         window.gtag('event', 'generate_lead', {

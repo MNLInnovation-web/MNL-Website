@@ -8,6 +8,8 @@ import UIExtras from '@/app/components/UIExtras';
 import ArticleCard from '@/app/components/ArticleCard';
 import TOC from '@/app/components/TOC';
 import ShareButtons from '@/app/components/ShareButtons';
+import ArticleCTA from '@/app/components/ArticleCTA';
+import GEOSummary from '@/app/components/GEOSummary';
 import { getPostBySlug, getAllPosts } from '@/lib/wp';
 import { mapWPPostToPost } from '@/lib/mapper';
 
@@ -181,6 +183,9 @@ export default async function SingleArticle({ params }: PageProps) {
         <div className="max-w-[980px] mx-auto flex flex-col lg:flex-row gap-20">
           {/* Main Body */}
           <div className="w-full lg:w-[740px] flex-shrink-0">
+            {/* GEO Optimized AI Summary Block */}
+            <GEOSummary excerpt={post.excerpt} />
+
             <div className="article-body prose prose-slate max-w-none" dangerouslySetInnerHTML={{ __html: post.content || '' }}>
             </div>
 
@@ -222,18 +227,7 @@ export default async function SingleArticle({ params }: PageProps) {
             </div>
 
             {/* CTA Box */}
-            <div className="mt-12 relative overflow-hidden bg-[var(--mn-navy-deep)] p-12 text-white">
-              <div className="absolute top-[-20%] right-[-10%] w-64 h-64 rounded-full border border-white/5 pointer-events-none"></div>
-              <div className="absolute bottom-[-20%] left-[-10%] w-48 h-48 rounded-full border border-[var(--mn-burgundy)]/20 pointer-events-none"></div>
-              
-              <div className="relative z-10 max-w-[500px]">
-                <h3 className="font-display italic text-3xl text-white mb-4 border-none p-0">Need legal advice on this topic?</h3>
-                <p className="text-white/60 text-base mb-8">Our {post.category} team is ready to help you navigate the complexities of Kenyan law.</p>
-                <Link href="/#contact" className="inline-block bg-[var(--mn-burgundy)] px-10 py-4 text-[11px] font-bold uppercase tracking-widest hover:bg-[var(--mn-burgundy-dark)] transition-all">
-                  Consult our Experts
-                </Link>
-              </div>
-            </div>
+            <ArticleCTA category={post.category} title={post.title} />
           </div>
 
           {/* Sticky Sidebar */}

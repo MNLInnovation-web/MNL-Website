@@ -28,6 +28,20 @@ const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: true, 
   },
+  async redirects() {
+    return [
+      {
+        source: '/404/',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/404',
+        destination: '/',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

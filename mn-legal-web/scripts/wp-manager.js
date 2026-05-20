@@ -117,12 +117,11 @@ async function publishPost({ title, content, excerpt, status = 'draft', categori
  * Audit existing posts for GEO Executive Summaries and auto-correct them in WordPress
  */
 async function auditAndFixGEOSummaries() {
-  const headers = getAuthHeaders();
   console.log('🔍 Initiating programmatic GEO/SEO compliance audit...');
   
   try {
-    // Fetch the 20 most recent published posts from WordPress REST API
-    const response = await fetch(`${WP_URL}/posts?per_page=20&status=publish`, { headers });
+    // Fetch the 20 most recent published posts from WordPress REST API (unauthenticated GET)
+    const response = await fetch(`${WP_URL}/posts?per_page=20&status=publish`);
     const posts = await response.json();
     
     if (!response.ok) {

@@ -193,8 +193,33 @@ export default function Hero() {
           </Link>
         </div>
 
+        {/* Proof Row */}
+        <div className="hero-btn mt-16 pt-8 border-t border-white/10 max-w-[500px]">
+          <span className="text-[10px] uppercase tracking-[2px] text-white/40 font-bold block mb-4">
+            Trusted by Leaders In:
+          </span>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 items-center opacity-65">
+            <div className="text-left">
+              <span className="text-[11px] font-display uppercase tracking-[1.5px] text-white/80 font-semibold block">Fintech</span>
+              <span className="text-[9px] uppercase tracking-[1px] text-[var(--mn-cream)]/50 block mt-0.5">Operators</span>
+            </div>
+            <div className="text-left border-l border-white/10 pl-4">
+              <span className="text-[11px] font-display uppercase tracking-[1.5px] text-white/80 font-semibold block">Digital</span>
+              <span className="text-[9px] uppercase tracking-[1px] text-[var(--mn-cream)]/50 block mt-0.5">Assets</span>
+            </div>
+            <div className="text-left border-l border-white/10 pl-4">
+              <span className="text-[11px] font-display uppercase tracking-[1.5px] text-white/80 font-semibold block">Venture</span>
+              <span className="text-[9px] uppercase tracking-[1px] text-[var(--mn-cream)]/50 block mt-0.5">Funds</span>
+            </div>
+            <div className="text-left border-l border-white/10 pl-4">
+              <span className="text-[11px] font-display uppercase tracking-[1.5px] text-white/80 font-semibold block">Corporate</span>
+              <span className="text-[9px] uppercase tracking-[1px] text-[var(--mn-cream)]/50 block mt-0.5">Advisory</span>
+            </div>
+          </div>
+        </div>
+
         {/* ADDED: slideshow dots */}
-        <div className="slide-dots" id="slide-dots">
+        <div className="slide-dots mt-8" id="slide-dots">
           {SLIDE_IMAGES.map((_, idx) => (
             <div 
               key={idx}

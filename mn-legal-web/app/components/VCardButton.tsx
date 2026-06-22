@@ -15,11 +15,12 @@ export default function VCardButton({ member }: VCardButtonProps) {
       `FN:${member.name}`,
       'ORG:MN Advocates LLP',
       `TITLE:${member.title}`,
-      `EMAIL;TYPE=PREF,INTERNET:${member.email}`,
-      `TEL;TYPE=CELL,VOICE:${member.phone}`,
+      member.email ? `EMAIL;TYPE=PREF,INTERNET:${member.email}` : '',
+      member.phone ? `TEL;TYPE=CELL,VOICE:${member.phone}` : '',
       `URL:https://www.mnlegal.net/team/${member.slug}`,
+      member.linkedIn ? `X-SOCIALPROFILE;type=linkedin:${member.linkedIn}` : '',
       'END:VCARD'
-    ].join('\r\n');
+    ].filter(Boolean).join('\r\n');
 
     const blob = new Blob([vcard], { type: 'text/vcard;charset=utf-8;' });
     const url = URL.createObjectURL(blob);

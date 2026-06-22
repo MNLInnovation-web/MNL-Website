@@ -199,12 +199,16 @@ export default async function PracticeAreaPage({ params }: Props) {
                     {leadAttorney.bio}
                   </p>
                   <div className="flex flex-wrap gap-4 pt-6 border-t border-neutral-100">
-                    <a href={`mailto:${leadAttorney.email}`} className="text-[11px] font-bold uppercase tracking-[2px] text-[var(--mn-navy)] hover:text-[var(--mn-burgundy)] transition-colors flex items-center gap-1.5 rounded-none">
-                      <Mail size={12} /> Direct Email
-                    </a>
-                    <a href={`tel:${leadAttorney.phone}`} className="text-[11px] font-bold uppercase tracking-[2px] text-[var(--mn-navy)] hover:text-[var(--mn-burgundy)] transition-colors flex items-center gap-1.5 rounded-none">
-                      <Phone size={12} /> Contact Line
-                    </a>
+                    {leadAttorney.email && (
+                      <a href={`mailto:${leadAttorney.email}`} className="text-[11px] font-bold uppercase tracking-[2px] text-[var(--mn-navy)] hover:text-[var(--mn-burgundy)] transition-colors flex items-center gap-1.5 rounded-none">
+                        <Mail size={12} /> Direct Email
+                      </a>
+                    )}
+                    {leadAttorney.phone && (
+                      <a href={`tel:${leadAttorney.phone}`} className="text-[11px] font-bold uppercase tracking-[2px] text-[var(--mn-navy)] hover:text-[var(--mn-burgundy)] transition-colors flex items-center gap-1.5 rounded-none">
+                        <Phone size={12} /> Contact Line
+                      </a>
+                    )}
                     <Link href={`/team/${leadAttorney.slug}`} className="text-[11px] font-bold uppercase tracking-[2px] text-[var(--mn-burgundy)] hover:underline ml-auto rounded-none">
                       Full Biography &rarr;
                     </Link>

@@ -10,8 +10,8 @@ export interface TeamMember {
   title: string;
   practice: string;
   image: string;
-  email: string;
-  phone: string;
+  email?: string;
+  phone?: string;
   credentials: string[];
   bio: string;
   linkedIn?: string;
@@ -25,8 +25,8 @@ export const teamMembers: TeamMember[] = [
     title: 'Founder & Managing Partner',
     practice: 'Corporate Commercial Law and International Business Strategy',
     image: 'https://wp.mnlegal.net/wp-content/uploads/2024/01/Mbula-Nzuki-team.jpg',
-    email: 'm.nzuki@mnlegal.net',
-    phone: '+254 700 325 089',
+    email: 'mbula@mnlegal.net',
+    phone: '+254 728 074 872',
     credentials: [
       'LL.M in International Trade & Investment Law',
       'Advocate of the High Court of Kenya',
@@ -53,8 +53,6 @@ export const teamMembers: TeamMember[] = [
     title: 'Chief Operations, Strategy & Growth',
     practice: 'Operational Excellence & Client Experience',
     image: 'https://wp.mnlegal.net/wp-content/uploads/2024/01/Sebie-Salim.jpg',
-    email: 's.salim@mnlegal.net',
-    phone: '+254 700 325 089',
     credentials: [
       'MSc in Business Administration',
       'Certified Legal Operations Professional',
@@ -69,8 +67,6 @@ export const teamMembers: TeamMember[] = [
     title: 'Litigation Department, Co-Head',
     practice: 'Dispute Resolution & Appellate Litigation',
     image: 'https://wp.mnlegal.net/wp-content/uploads/2024/01/Mutundu-Chege.jpg',
-    email: 'm.chege@mnlegal.net',
-    phone: '+254 700 325 089',
     credentials: [
       'LL.B (Hons), University of Nairobi',
       'Advocate of the High Court of Kenya',
@@ -91,8 +87,6 @@ export const teamMembers: TeamMember[] = [
     title: 'Of Counsel - London 🇬🇧',
     practice: 'Maritime and Commercial Law + International Arbitration',
     image: 'https://wp.mnlegal.net/wp-content/uploads/2026/01/IMG_8790.jpeg',
-    email: 'k.zariou@mnlegal.net',
-    phone: '+44 20 7946 0192',
     credentials: [
       'Solicitor of the Senior Courts of England & Wales',
       'LL.M in Maritime Law (Southampton)',
@@ -114,8 +108,8 @@ export const teamMembers: TeamMember[] = [
     title: 'Senior Associate',
     practice: 'Corporate Commercial + Real Estate Law',
     image: 'https://wp.mnlegal.net/wp-content/uploads/2026/03/1771405050567.jpg',
-    email: 'h.mohammed@mnlegal.net',
-    phone: '+254 700 325 089',
+    email: 'husna@mnlegal.net',
+    phone: '+254 753 028 437 / +254 700 325 089',
     credentials: [
       'Advocate of the High Court of Kenya',
       'LL.B (Hons), Jomo Kenyatta University of Agriculture and Technology',
@@ -130,14 +124,14 @@ export const teamMembers: TeamMember[] = [
     title: 'AI & Digital transformation Associate',
     practice: 'Legal Technology & Frontier Regulation',
     image: 'https://wp.mnlegal.net/wp-content/uploads/2026/01/1000053692.jpg',
-    email: 'z.ongeri@mnlegal.net',
-    phone: '+254 700 325 089',
+    email: 'ongeri@mnlegal.net',
+    phone: '+254 769 139 875 / +254 795 023 213',
     credentials: [
       'LL.B (Hons), University of Nairobi',
       'Advocate of the High Court of Kenya',
       'Certified Legal Technology Professional'
     ],
-    bio: "Zachary coordinates the firm's AI & Emerging Tech advisory group. He specializes in mapping operational parameters for generative AI systems, smart contracts compliance, and helping foreign platforms enter the East African regulatory sandbox.",
+    bio: "Zachary Ongeri is the AI Associate at MNL Advocates LLP, where he leads digital infrastructure and AI product development. He builds the platforms and tools that underpin the firm's operations, bridging legal practice and emerging technology to help the firm work faster and serve clients across African markets. He also leads operations for the firm's flagship events, including the MNL Africa Leadership Circle Summit.",
     publications: [
       {
         title: "Kenya's AI Bill 2026: Balancing Innovation with Ethical Guardrails",
@@ -152,8 +146,6 @@ export const teamMembers: TeamMember[] = [
     title: 'Associate',
     practice: 'Commercial Law & International Arbitration',
     image: 'https://wp.mnlegal.net/wp-content/uploads/2024/01/Nour-Sheriff.jpg',
-    email: 'n.sheriff@mnlegal.net',
-    phone: '+254 700 325 089',
     credentials: [
       'Advocate of the High Court of Kenya',
       'LL.B (Hons), Strathmore University Law School',
@@ -168,8 +160,6 @@ export const teamMembers: TeamMember[] = [
     title: 'Head of Cybersecurity',
     practice: 'Cybersecurity & Digital Forensics',
     image: 'https://wp.mnlegal.net/wp-content/uploads/2026/03/Tyrus-Muya-Kamau.jpg.jpeg',
-    email: 't.kamau@mnlegal.net',
-    phone: '+254 700 325 089',
     credentials: [
       'MSc in Information Security & Digital Forensics',
       'Certified Information Systems Security Professional (CISSP)',
@@ -191,8 +181,8 @@ export const teamMembers: TeamMember[] = [
     title: 'HRM and Tax Associate',
     practice: 'Human Resources & Taxation',
     image: 'https://wp.mnlegal.net/wp-content/uploads/2026/04/IMG_3394.JPG-1-scaled.jpeg',
-    email: 'k.mwangi@mnlegal.net',
-    phone: '+254 700 325 089',
+    email: 'keziah@mnlegal.net',
+    phone: '+254 795 801 729',
     credentials: [
       'Certified Human Resource Practitioner (CHRP-K)',
       'Postgraduate Diploma in Tax Administration (KESRA)',
@@ -207,8 +197,6 @@ export const teamMembers: TeamMember[] = [
     title: 'Digital Marketing & Communications Lead',
     practice: 'Brand Strategy & Media Communications',
     image: 'https://wp.mnlegal.net/wp-content/uploads/2026/04/Nahashon.jpeg',
-    email: 'n.muhari@mnlegal.net',
-    phone: '+254 700 325 089',
     credentials: [
       'B.A. in Communication & Journalism',
       'Certified Digital Marketing Professional'

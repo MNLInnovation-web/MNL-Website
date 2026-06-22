@@ -53,8 +53,8 @@ export default async function TeamMemberPage({ params }: Props) {
       "name": "MN Advocates LLP",
       "url": "https://www.mnlegal.net"
     },
-    "email": member.email,
-    "telephone": member.phone,
+    ...(member.email ? { "email": member.email } : {}),
+    ...(member.phone ? { "telephone": member.phone } : {}),
     "image": member.image,
     "url": `https://www.mnlegal.net/team/${member.slug}`
   };
@@ -104,18 +104,22 @@ export default async function TeamMemberPage({ params }: Props) {
                   Direct Contact
                 </h3>
                 <div className="space-y-4 text-[14px]">
-                  <div className="flex items-center gap-3">
-                    <Mail size={16} className="text-[var(--mn-burgundy)] shrink-0" />
-                    <a href={`mailto:${member.email}`} className="text-[var(--mn-navy)] hover:text-[var(--mn-burgundy)] transition-colors font-medium break-all">
-                      {member.email}
-                    </a>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Phone size={16} className="text-[var(--mn-burgundy)] shrink-0" />
-                    <a href={`tel:${member.phone}`} className="text-[var(--mn-navy)] hover:text-[var(--mn-burgundy)] transition-colors font-medium">
-                      {member.phone}
-                    </a>
-                  </div>
+                  {member.email && (
+                    <div className="flex items-center gap-3">
+                      <Mail size={16} className="text-[var(--mn-burgundy)] shrink-0" />
+                      <a href={`mailto:${member.email}`} className="text-[var(--mn-navy)] hover:text-[var(--mn-burgundy)] transition-colors font-medium break-all">
+                        {member.email}
+                      </a>
+                    </div>
+                  )}
+                  {member.phone && (
+                    <div className="flex items-center gap-3">
+                      <Phone size={16} className="text-[var(--mn-burgundy)] shrink-0" />
+                      <a href={`tel:${member.phone}`} className="text-[var(--mn-navy)] hover:text-[var(--mn-burgundy)] transition-colors font-medium">
+                        {member.phone}
+                      </a>
+                    </div>
+                  )}
                   {member.linkedIn && (
                     <div className="flex items-center gap-3">
                       <Linkedin size={16} className="text-[var(--mn-burgundy)] shrink-0" />

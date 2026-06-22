@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 
 import Image from 'next/image';
 
@@ -18,7 +17,6 @@ const navLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,7 +26,7 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const isTextDark = !scrolled && pathname !== '/';
+
 
   return (
     <nav 
@@ -54,9 +52,7 @@ export default function Navbar() {
           <li key={label}>
             <Link 
               href={href}
-              className={`text-[11px] font-medium tracking-[1.2px] uppercase transition-colors duration-300 relative pb-[4px] after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-[1px] after:bg-[var(--mn-burgundy)] after:transition-all after:duration-400 after:ease-[var(--ease-expo)] ${
-                isTextDark ? 'text-[#1a2744] hover:text-[var(--mn-burgundy)]' : 'text-white/60 hover:text-white'
-              } after:w-0 hover:after:w-full`}
+              className="text-[11px] font-medium tracking-[1.2px] uppercase transition-colors duration-300 relative pb-[4px] after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-[1px] after:bg-[var(--mn-burgundy)] after:transition-all after:duration-400 after:ease-[var(--ease-expo)] text-white/70 hover:text-white after:w-0 hover:after:w-full"
             >
               {label}
             </Link>
@@ -78,9 +74,9 @@ export default function Navbar() {
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Menu"
         >
-          <span className={`block w-[22px] h-[1.5px] ${isTextDark ? 'bg-[#1a2744]' : 'bg-white'} transition-all duration-400 ease-[var(--ease-expo)] ${isOpen ? 'translate-y-[6.5px] rotate-45 !bg-white' : ''}`}></span>
-          <span className={`block w-[22px] h-[1.5px] ${isTextDark ? 'bg-[#1a2744]' : 'bg-white'} transition-opacity duration-300 ${isOpen ? 'opacity-0' : 'opacity-100'}`}></span>
-          <span className={`block w-[22px] h-[1.5px] ${isTextDark ? 'bg-[#1a2744]' : 'bg-white'} transition-all duration-400 ease-[var(--ease-expo)] ${isOpen ? 'translate-y-[-6.5px] -rotate-45 !bg-white' : ''}`}></span>
+          <span className={`block w-[22px] h-[1.5px] bg-white transition-all duration-400 ease-[var(--ease-expo)] ${isOpen ? 'translate-y-[6.5px] rotate-45' : ''}`}></span>
+          <span className={`block w-[22px] h-[1.5px] bg-white transition-opacity duration-300 ${isOpen ? 'opacity-0' : 'opacity-100'}`}></span>
+          <span className={`block w-[22px] h-[1.5px] bg-white transition-all duration-400 ease-[var(--ease-expo)] ${isOpen ? 'translate-y-[-6.5px] -rotate-45' : ''}`}></span>
         </button>
       </div>
 

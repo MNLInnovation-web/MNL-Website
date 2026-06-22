@@ -115,7 +115,7 @@ export const teamMembers: TeamMember[] = [
       'LL.B (Hons), Jomo Kenyatta University of Agriculture and Technology',
       'Postgraduate Diploma, Kenya School of Law'
     ],
-    bio: 'Husna is a Senior Associate in the Corporate & Real Estate practice group. She counsels local real estate developers, foreign venture partners, and corporate boards on complex land-use planning, sectional properties, and capital structure advisory.',
+    bio: "Husna is a Senior Associate in the Corporate & Real Estate practice group. She counsels local real estate developers, foreign venture partners, and corporate boards on complex land-use planning, sectional properties, and capital structure advisory. She also serves on the Summit Leadership Operations team, coordinating key logistics and planning for the firm's flagship event.",
     linkedIn: 'https://www.linkedin.com/in/husna-mohammed-94686317b/',
   },
   {
@@ -188,7 +188,7 @@ export const teamMembers: TeamMember[] = [
       'Postgraduate Diploma in Tax Administration (KESRA)',
       'B.Com in Finance'
     ],
-    bio: 'Keziah Mwangi heads our employment tax and workplace regulatory team. She assists scaling tech platforms and multinational companies in structuring compliant ESOPs, managing expat tax issues, and resolving KRA payroll audit matters.',
+    bio: "Keziah Mwangi heads our employment tax and workplace regulatory team. She assists scaling tech platforms and multinational companies in structuring compliant ESOPs, managing expat tax issues, and resolving KRA payroll audit matters. She also serves on the Summit Leadership Operations team, managing strategic operations and coordination for the firm's flagship event.",
     linkedIn: 'https://www.linkedin.com/in/keziah-mwangi/',
   },
   {

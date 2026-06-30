@@ -87,6 +87,7 @@ export default function ContactSection({ defaultMatterType, ctaPrompt }: Contact
           event_category: 'engagement',
           event_label: formData.matterType,
           lead_source: 'contact_form',
+          matter_type: formData.matterType,
           company_name: formData.companyName,
           job_title: formData.jobTitle,
           contact_preference: formData.contactPreference,

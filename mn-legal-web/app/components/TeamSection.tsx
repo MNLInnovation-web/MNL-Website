@@ -46,7 +46,20 @@ function TeamMemberCard({ member, index }: { member: TeamMember; index: number }
               rel="noopener noreferrer"
               aria-label={`${member.name} on LinkedIn`}
               className="flex-shrink-0 w-7 h-7 flex items-center justify-center border border-[var(--mn-gray-light)] text-[var(--text-secondary)] hover:border-[#0A66C2] hover:text-[#0A66C2] hover:bg-[#0A66C2]/5 transition-all duration-300"
-              onClick={(e) => e.stopPropagation()}
+              onClick={(e) => {
+                e.stopPropagation();
+                if (typeof window !== 'undefined' && window.gtag) {
+                  window.gtag('event', 'generate_lead', {
+                    event_category: 'team_card',
+                    event_label: member.name,
+                    lead_source: 'team_card_linkedin_click',
+                    team_member: member.name,
+                    team_member_title: member.title,
+                    value: 1.0,
+                    currency: 'KES',
+                  });
+                }
+              }}
             >
               <Linkedin size={13} strokeWidth={1.8} />
             </a>

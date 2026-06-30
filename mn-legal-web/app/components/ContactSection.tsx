@@ -43,6 +43,20 @@ export default function ContactSection({ defaultMatterType, ctaPrompt }: Contact
     setTimeout(() => setCurrentStep(3), 250);
   };
 
+  // Fire a generate_lead event when a visitor uses a direct contact channel
+  // (email, phone, WhatsApp) instead of the form.
+  const trackDirectContact = (leadSource: string) => {
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'generate_lead', {
+        event_category: 'engagement',
+        event_label: leadSource,
+        lead_source: leadSource,
+        value: 1.0,
+        currency: 'KES',
+      });
+    }
+  };
+
   const isStep1Valid = () => {
     return (
       formData.fullName.trim().length >= 2 &&
@@ -157,22 +171,23 @@ export default function ContactSection({ defaultMatterType, ctaPrompt }: Contact
             <div className="space-y-8">
               <div className="group">
                 <span className="block text-[11px] uppercase text-white/60 tracking-[2px] mb-1 font-bold">General Inquiry</span>
-                <a href="mailto:info@mnlegal.net" className="text-[24px] font-display text-white group-hover:text-[var(--mn-burgundy)] transition-colors border-none p-0">
+                <a href="mailto:info@mnlegal.net" onClick={() => trackDirectContact('general_email_click')} className="text-[24px] font-display text-white group-hover:text-[var(--mn-burgundy)] transition-colors border-none p-0">
                   info@mnlegal.net
                 </a>
               </div>
               <div className="group">
                 <span className="block text-[11px] uppercase text-white/60 tracking-[2px] mb-1 font-bold">Nairobi Office</span>
-                <a href="tel:+254700325089" className="text-[24px] font-display text-white group-hover:text-[var(--mn-burgundy)] transition-colors border-none p-0">
+                <a href="tel:+254700325089" onClick={() => trackDirectContact('general_phone_click')} className="text-[24px] font-display text-white group-hover:text-[var(--mn-burgundy)] transition-colors border-none p-0">
                   +254 700 325 089
                 </a>
               </div>
               <div className="group">
                 <span className="block text-[11px] uppercase text-white/60 tracking-[2px] mb-1 font-bold">Secure WhatsApp</span>
-                <a 
-                  href="https://wa.me/254700325089?text=Hello%20MNL%20Advocates%2C%20I%20would%20like%20to%20schedule%20a%20corporate%20legal%20consultation%20regarding%20our%20business%20in%20Kenya." 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
+                <a
+                  href="https://wa.me/254700325089?text=Hello%20MNL%20Advocates%2C%20I%20would%20like%20to%20schedule%20a%20corporate%20legal%20consultation%20regarding%20our%20business%20in%20Kenya."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => trackDirectContact('whatsapp_click')}
                   className="text-[24px] font-display text-white group-hover:text-[var(--mn-burgundy)] transition-colors border-none p-0 flex items-center gap-2"
                 >
                   💬 +254 700 325 089

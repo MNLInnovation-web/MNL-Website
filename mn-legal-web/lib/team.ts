@@ -127,9 +127,9 @@ export const teamMembers: TeamMember[] = [
     email: 'ongeri@mnlegal.net',
     phone: '+254 769 139 875 / +254 795 023 213',
     credentials: [
-      'LL.B (Hons), University of Nairobi',
-      'Advocate of the High Court of Kenya',
-      'Certified Legal Technology Professional'
+      'Certified Legal Technology Professional',
+      'AI & Digital Strategy Certification',
+      'Project Management Professional (PMP)'
     ],
     bio: "Zachary Ongeri is the AI Associate at MNL Advocates LLP, where he leads digital infrastructure and AI product development. He builds the platforms and tools that underpin the firm's operations, bridging legal practice and emerging technology to help the firm work faster and serve clients across African markets. He also leads operations for the firm's flagship events, including the MNL Africa Leadership Circle Summit.",
     publications: [

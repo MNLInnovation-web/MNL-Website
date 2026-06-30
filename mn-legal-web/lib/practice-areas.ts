@@ -214,7 +214,7 @@ export const practiceAreas: PracticeArea[] = [
       title: 'Leading the Way in AI & IP',
       content: 'The intersection of AI and Intellectual Property is the new frontier. We are one of the few firms in East Africa equipped to handle the unique IP challenges posed by AI-generated content and software-based innovations.'
     },
-    leadAttorneySlug: 'zachary-ongeri'
+    leadAttorneySlug: 'mbula-nzuki'
   },
   {
     id: '06',

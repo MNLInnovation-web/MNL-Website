@@ -3,12 +3,29 @@
 import { Download } from 'lucide-react';
 import { TeamMember } from '../../lib/team';
 
+declare global {
+  interface Window {
+    gtag: (...args: unknown[]) => void;
+  }
+}
+
 interface VCardButtonProps {
   member: TeamMember;
 }
 
 export default function VCardButton({ member }: VCardButtonProps) {
   const handleDownload = () => {
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'generate_lead', {
+        event_category: 'team_profile',
+        event_label: member.name,
+        lead_source: 'team_vcard_download',
+        team_member: member.name,
+        team_member_title: member.title,
+        value: 1.0,
+        currency: 'KES',
+      });
+    }
     const vcard = [
       'BEGIN:VCARD',
       'VERSION:3.0',

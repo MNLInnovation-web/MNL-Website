@@ -2,11 +2,11 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowLeft, Mail, Phone, Linkedin, Calendar, GraduationCap, Award, BookOpen } from 'lucide-react';
+import { ArrowLeft, GraduationCap, BookOpen } from 'lucide-react';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import ContactSection from '../../components/ContactSection';
-import VCardButton from '../../components/VCardButton';
+import TeamContactCard from '../../components/TeamContactCard';
 import { teamMembers, getTeamMemberBySlug } from '../../../lib/team';
 
 interface Props {
@@ -99,41 +99,7 @@ export default async function TeamMemberPage({ params }: Props) {
               </div>
 
               {/* Direct Details Card */}
-              <div className="border border-[var(--mn-burgundy)]/10 bg-[var(--mn-cream)] p-8 rounded-none space-y-6">
-                <h3 className="text-[16px] font-display text-[var(--heading-primary)] uppercase tracking-[1px] border-b border-[var(--mn-burgundy)]/10 pb-4 font-bold">
-                  Direct Contact
-                </h3>
-                <div className="space-y-4 text-[14px]">
-                  {member.email && (
-                    <div className="flex items-center gap-3">
-                      <Mail size={16} className="text-[var(--mn-burgundy)] shrink-0" />
-                      <a href={`mailto:${member.email}`} className="text-[var(--mn-navy)] hover:text-[var(--mn-burgundy)] transition-colors font-medium break-all">
-                        {member.email}
-                      </a>
-                    </div>
-                  )}
-                  {member.phone && (
-                    <div className="flex items-center gap-3">
-                      <Phone size={16} className="text-[var(--mn-burgundy)] shrink-0" />
-                      <a href={`tel:${member.phone}`} className="text-[var(--mn-navy)] hover:text-[var(--mn-burgundy)] transition-colors font-medium">
-                        {member.phone}
-                      </a>
-                    </div>
-                  )}
-                  {member.linkedIn && (
-                    <div className="flex items-center gap-3">
-                      <Linkedin size={16} className="text-[var(--mn-burgundy)] shrink-0" />
-                      <a href={member.linkedIn} target="_blank" rel="noopener noreferrer" className="text-[var(--mn-navy)] hover:text-[var(--mn-burgundy)] transition-colors font-medium">
-                        Professional LinkedIn Profile
-                      </a>
-                    </div>
-                  )}
-                </div>
-                
-                <div className="pt-4 border-t border-[var(--mn-burgundy)]/10">
-                  <VCardButton member={member} />
-                </div>
-              </div>
+              <TeamContactCard member={member} />
 
               {/* Credentials / Admissions */}
               <div className="space-y-6">
@@ -250,8 +216,4 @@ export default async function TeamMemberPage({ params }: Props) {
       <Footer />
     </main>
   );
-}
-
-export function getTeamMemberBySlug(slug: string) {
-  return teamMembers.find(member => member.slug === slug);
 }

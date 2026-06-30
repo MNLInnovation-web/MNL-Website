@@ -205,3 +205,7 @@ export const teamMembers: TeamMember[] = [
     linkedIn: 'https://www.linkedin.com/in/nahashon-muhari-474a0628b/',
   }
 ];
+
+export function getTeamMemberBySlug(slug: string): TeamMember | undefined {
+  return teamMembers.find((member) => member.slug === slug);
+}

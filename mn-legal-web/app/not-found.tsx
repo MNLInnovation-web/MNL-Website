@@ -50,7 +50,7 @@ export default function NotFound() {
               Return to Homepage
             </Link>
             <Link 
-              href="/#contact"
+              href="/contact"
               className="bg-transparent border border-white/30 text-white text-[11px] font-bold uppercase tracking-[2.5px] px-10 py-5 hover:bg-white hover:text-[var(--mn-navy)] transition-all duration-500"
             >
               Initiate Consultation

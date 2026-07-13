@@ -140,12 +140,12 @@ export default function TeamSection() {
             <p className="text-sm text-white/50 mb-8 leading-relaxed">
               We are always looking for exceptional legal talent to join our growing firm.
             </p>
-            <a 
-              href="#contact" 
+            <Link
+              href="/contact"
               className="text-[10px] uppercase font-bold text-[var(--mn-burgundy)] tracking-[2px] border-b border-[var(--mn-burgundy)] pb-1 hover:text-white hover:border-white transition-all duration-300"
             >
               Send Application
-            </a>
+            </Link>
           </div>
         </div>
       </div>

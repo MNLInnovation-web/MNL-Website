@@ -174,12 +174,12 @@ export default async function TeamMemberPage({ params }: Props) {
                   <p className="text-white/80 text-[14px] leading-relaxed mb-6 font-medium">
                     {member.name} is a key facilitator for panel debates and private advisory roundtables at our upcoming flagship summit in Nairobi. Connect directly to request delegate access or agenda coordination.
                   </p>
-                  <a 
-                    href="#contact" 
+                  <Link
+                    href="/contact"
                     className="inline-flex items-center text-[11px] uppercase font-bold text-[var(--mn-burgundy)] tracking-widest hover:text-white transition-colors border-b border-[var(--mn-burgundy)] pb-1"
                   >
                     Request Summit Invitation &rarr;
-                  </a>
+                  </Link>
                 </div>
               )}
 

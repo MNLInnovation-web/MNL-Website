@@ -11,7 +11,7 @@ const navLinks = [
   { label: 'About',          href: '/#about' },
   { label: 'Our Team',       href: '/#team' },
   { label: 'Insights',       href: '/insights' },
-  { label: 'Contact',        href: '/#contact' },
+  { label: 'Contact',        href: '/contact' },
 ];
 
 export default function Navbar() {
@@ -63,7 +63,7 @@ export default function Navbar() {
       <div className="flex items-center gap-2 md:gap-4">
         <button 
           className="nav-btn hidden md:block bg-[var(--mn-burgundy)] border-2 border-[var(--mn-burgundy)] text-white p-[10px_26px] text-[11px] font-semibold tracking-[1.5px] uppercase relative overflow-hidden group"
-          onClick={() => window.location.href = '/#contact'}
+          onClick={() => window.location.href = '/contact'}
         >
           <span className="relative z-10">Consult Now</span>
           <div className="absolute inset-0 bg-[var(--mn-burgundy-dark)] translate-x-[-101%] transition-transform duration-500 ease-[var(--ease-expo)] group-hover:translate-x-0"></div>

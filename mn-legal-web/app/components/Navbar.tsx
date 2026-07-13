@@ -72,7 +72,9 @@ export default function Navbar() {
         <button 
           className={`nav-ham md:hidden flex flex-col gap-[5px] p-[4px] ml-2 relative z-[1001] ${isOpen ? 'open' : ''}`}
           onClick={() => setIsOpen(!isOpen)}
-          aria-label="Menu"
+          aria-label="Toggle Navigation Menu"
+          aria-expanded={isOpen}
+          aria-controls="mobile-navigation-menu"
         >
           <span className={`block w-[22px] h-[1.5px] bg-white transition-all duration-400 ease-[var(--ease-expo)] ${isOpen ? 'translate-y-[6.5px] rotate-45' : ''}`}></span>
           <span className={`block w-[22px] h-[1.5px] bg-white transition-opacity duration-300 ${isOpen ? 'opacity-0' : 'opacity-100'}`}></span>
@@ -81,7 +83,11 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Menu */}
-      <div className={`fixed inset-0 bg-[var(--mn-navy-deep)] transition-transform duration-500 ease-[var(--ease-expo)] md:hidden flex flex-col items-center justify-center gap-8 ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+      <div
+        id="mobile-navigation-menu"
+        aria-hidden={!isOpen}
+        className={`fixed inset-0 bg-[var(--mn-navy-deep)] transition-transform duration-500 ease-[var(--ease-expo)] md:hidden flex flex-col items-center justify-center gap-8 ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
+      >
          {navLinks.map(({ label, href }) => (
            <Link 
              key={label} 

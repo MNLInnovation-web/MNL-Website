@@ -13,16 +13,20 @@ interface Props {
   params: Promise<{ slug: string }>;
 }
 
+import { generateSEO } from '@/lib/seo';
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const member = getTeamMemberBySlug(slug);
 
   if (!member) return { title: 'Team Member Not Found' };
 
-  return {
+  return generateSEO({
     title: `${member.name} | ${member.title} | MN Advocates LLP`,
     description: member.bio.substring(0, 160),
-  };
+    path: `/team/${slug}`,
+    ogImage: member.image,
+  });
 }
 
 export async function generateStaticParams() {
@@ -44,19 +48,34 @@ export default async function TeamMemberPage({ params }: Props) {
 
   const schemaJson = {
     "@context": "https://schema.org",
-    "@type": "Person",
-    "@id": `https://www.mnlegal.net/team/${member.slug}`,
-    "name": member.name,
-    "jobTitle": member.title,
-    "worksFor": {
-      "@type": "LegalService",
-      "name": "MN Advocates LLP",
-      "url": "https://www.mnlegal.net"
-    },
-    ...(member.email ? { "email": member.email } : {}),
-    ...(member.phone ? { "telephone": member.phone } : {}),
-    "image": member.image,
-    "url": `https://www.mnlegal.net/team/${member.slug}`
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": `https://mnlegal.net/team/${member.slug}#person`,
+        "name": member.name,
+        "jobTitle": member.title,
+        "worksFor": {
+          "@id": "https://mnlegal.net/#organization"
+        },
+        "affiliation": {
+          "@id": "https://mnlegal.net/#organization"
+        },
+        ...(member.email ? { "email": member.email } : {}),
+        ...(member.phone ? { "telephone": member.phone } : {}),
+        "image": member.image,
+        "url": `https://mnlegal.net/team/${member.slug}`,
+        "description": member.bio,
+        "sameAs": member.linkedIn ? [member.linkedIn] : []
+      },
+      {
+        "@type": "WebPage",
+        "@id": `https://mnlegal.net/team/${member.slug}#webpage`,
+        "url": `https://mnlegal.net/team/${member.slug}`,
+        "name": `${member.name} - ${member.title} | MN Advocates LLP`,
+        "isPartOf": { "@id": "https://mnlegal.net/#website" },
+        "about": { "@id": `https://mnlegal.net/team/${member.slug}#person` }
+      }
+    ]
   };
 
   return (

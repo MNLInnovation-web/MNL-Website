@@ -1,0 +1,29 @@
+
+> mn-legal-web@0.1.0 dev
+> next dev
+
+   ▲ Next.js 15.5.12
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.0.2:3000
+
+ ✓ Starting...
+ ✓ Ready in 2s
+ ○ Compiling / ...
+ ✓ Compiled / in 7s (795 modules)
+Invalid DOM property `fetchpriority`. Did you mean `fetchPriority`?
+ HEAD / 200 in 8511ms
+[TypeError: fetch failed] {
+  [cause]: [AggregateError: ] { code: 'ETIMEDOUT' }
+}
+[TypeError: fetch failed] {
+  [cause]: [AggregateError: ] { code: 'ETIMEDOUT' }
+}
+[TypeError: fetch failed] {
+  [cause]: [AggregateError: ] { code: 'ETIMEDOUT' }
+}
+ GET / 200 in 358ms
+ ○ Compiling /contact ...
+ ✓ Compiled /contact in 1164ms (783 modules)
+ GET / 200 in 642ms
+ GET /contact 200 in 2035ms
+[?25h

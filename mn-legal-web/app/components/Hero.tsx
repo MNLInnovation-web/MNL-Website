@@ -248,6 +248,8 @@ export default function Hero() {
                 src={slide.url}
                 alt={slide.alt}
                 style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }}
+                loading={idx === 0 ? "eager" : "lazy"}
+                {...(idx === 0 ? { fetchPriority: "high" } as any : {})}
                 onError={(e) => {
                   (e.target as HTMLImageElement).style.display = 'none';
                   (e.target as HTMLImageElement).parentElement!.style.background = 'linear-gradient(160deg,#1a2744,#2d3e5f)';

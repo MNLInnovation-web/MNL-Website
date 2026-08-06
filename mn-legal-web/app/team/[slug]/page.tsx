@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!member) return { title: 'Team Member Not Found' };
 
   return {
-    title: `${member.name} | ${member.title} | MN Advocates LLP`,
+    title: `${member.name} | ${member.title}`,
     description: member.bio.substring(0, 160),
   };
 }

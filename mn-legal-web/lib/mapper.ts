@@ -17,7 +17,9 @@ export function mapWPPostToPost(wpPost: any): Post {
     };
   }
 
-  const content = wpPost.content || '';
+  // The page hero already renders one <h1> from the post title, so any <h1>
+  // inside the WP body content would create a second, duplicate H1.
+  const content = (wpPost.content || '').replace(/<h1([\s>])/gi, '<h2$1').replace(/<\/h1>/gi, '</h2>');
   const wordCount = content.split(/\s+/).length;
   const readTimeMinutes = Math.ceil(wordCount / 220);
   const readTime = `${readTimeMinutes} min read`;
@@ -78,7 +80,7 @@ export function mapWPPostToPost(wpPost: any): Post {
     slug: wpPost.slug || 'untitled',
     title: wpPost.title || 'Untitled Post',
     excerpt: wpPost.excerpt ? wpPost.excerpt.replace(/<[^>]*>?/gm, '') : '', 
-    content: wpPost.content || '',
+    content,
     date: formattedDate,
     category: categoryName,
     author: {

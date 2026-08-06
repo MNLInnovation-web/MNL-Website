@@ -20,10 +20,10 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | MN Legal - Top Legal Tech Firm Kenya",
+    template: "%s | MN Legal",
     default: "MN Legal - Data Privacy & Corporate Law Experts Nairobi",
   },
-  description: "MN Legal (MN Advocates LLP) is Kenya's premier Legal Tech and Data Privacy law firm. We specialize in AI Law, Corporate Commercial, and Dispute Resolution in Nairobi.",
+  description: "Kenya's premier Legal Tech and Data Privacy law firm, specializing in AI Law, Corporate Commercial, and Dispute Resolution in Nairobi.",
   keywords: ["Legal Tech Kenya", "Data Privacy Lawyers Nairobi", "AI Law Kenya", "Corporate Lawyers Nairobi", "MN Advocates LLP", "Tech Lawyers Kenya"],
   authors: [{ name: "MN Legal" }],
   creator: "MN Legal",

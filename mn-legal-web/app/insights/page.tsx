@@ -3,7 +3,7 @@ import { Suspense } from 'react';
 
 export const metadata: Metadata = {
   title: 'Legal Insights & Articles',
-  description: 'Thought leadership, legal analysis, and practical commentary on Kenyan law, Data Privacy, AI governance, Corporate Commercial law, and the East African legal landscape from MN Advocates LLP.',
+  description: 'Thought leadership and legal analysis on Kenyan law, Data Privacy, AI governance, and Corporate Commercial law from MN Advocates LLP.',
   openGraph: {
     title: 'Legal Insights & Articles | MN Advocates LLP',
     description: 'Expert legal commentary on Kenyan law, Data Privacy, AI governance, and Corporate Commercial law from senior advocates in Nairobi.',

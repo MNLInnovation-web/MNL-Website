@@ -2,7 +2,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
 export const metadata = {
-  title: "Privacy Policy | MN Advocates LLP",
+  title: "Privacy Policy",
   description: "MN Legal's Privacy Policy and data protection standards in compliance with Kenya's Data Protection Act.",
 };
 

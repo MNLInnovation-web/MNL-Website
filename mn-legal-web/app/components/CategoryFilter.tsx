@@ -6,21 +6,16 @@ interface CategoryFilterProps {
   counts: Record<string, number>;
 }
 
-const categoryMap: Record<string, string> = {
-  "All Articles": "all",
-  "Corporate Law": "corporate",
-  "Litigation": "litigation",
-  "Property Law": "property",
-  "Employment Law": "employment",
-  "Banking & Finance": "banking",
-  "Intellectual Property": "ip",
-  "Regulatory Updates": "regulatory",
-  "Case Law": "caselaw"
-};
-
-const categories = Object.keys(categoryMap);
-
 export default function CategoryFilter({ activeCategory, onCategoryChange, counts }: CategoryFilterProps) {
+  // Build tabs from the categories that actually have published articles, so the
+  // bar never shows an empty "(0)" tab and never omits a real WP category.
+  const categories = [
+    "All Articles",
+    ...Object.keys(counts)
+      .filter((cat) => cat !== "All Articles" && counts[cat] > 0)
+      .sort((a, b) => a.localeCompare(b)),
+  ];
+
   return (
     <div id="cat-bar" role="navigation" aria-label="Article categories" className="sticky top-[72px] z-[100] bg-[var(--bg-primary)] border-b border-[var(--mn-cream-dark)] overflow-x-auto no-scrollbar scroll-smooth">
       <div className="cat-inner flex gap-0 px-[60px] md:px-[60px] px-[24px] min-w-max">

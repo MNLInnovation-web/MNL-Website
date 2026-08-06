@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!area) return { title: 'Practice Area Not Found' };
 
   return {
-    title: `${area.seoTitle} | MN Advocates LLP`,
+    title: area.seoTitle,
     description: area.longDescription.substring(0, 160),
     keywords: area.keywords.join(', '),
   };

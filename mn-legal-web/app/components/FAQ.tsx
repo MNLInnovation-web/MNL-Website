@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Plus, Minus } from 'lucide-react';
 
 const faqs = [
@@ -24,11 +24,6 @@ const faqs = [
 
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
 
   const toggleFAQ = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -49,12 +44,10 @@ export default function FAQ() {
 
   return (
     <section className="bg-[var(--mn-cream)] py-24 px-6 md:px-16" id="faq">
-      {isClient && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-      )}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="max-w-[800px] mx-auto">
         <div className="mb-12 text-center">
           <span className="text-[var(--mn-burgundy)] font-bold tracking-[2px] uppercase text-[13px] mb-4 block">

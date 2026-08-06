@@ -180,13 +180,13 @@ export default function Hero() {
         
         <div className="flex flex-col sm:flex-row gap-6">
           <Link
-            href="#contact"
+            href="/contact"
             className="hero-btn btn-primary bg-[var(--mn-burgundy)] text-white text-[13px] font-bold uppercase tracking-[1.5px] px-8 py-4 border border-[var(--mn-burgundy)] hover:bg-[var(--mn-burgundy-dark)] transition-colors duration-300 min-w-[200px] text-center"
           >
             Consult Our Team
           </Link>
           <Link
-            href="#practice"
+            href="/practice-areas"
             className="hero-btn btn-secondary bg-transparent text-white text-[13px] font-bold uppercase tracking-[1.5px] px-8 py-4 border border-white hover:bg-[rgba(255,255,255,0.1)] transition-all duration-300 min-w-[200px] text-center"
           >
             Our Practice Areas
@@ -248,6 +248,8 @@ export default function Hero() {
                 src={slide.url}
                 alt={slide.alt}
                 style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }}
+                loading={idx === 0 ? "eager" : "lazy"}
+                {...(idx === 0 ? { fetchPriority: "high" } as any : {})}
                 onError={(e) => {
                   (e.target as HTMLImageElement).style.display = 'none';
                   (e.target as HTMLImageElement).parentElement!.style.background = 'linear-gradient(160deg,#1a2744,#2d3e5f)';

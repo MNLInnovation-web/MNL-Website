@@ -1,10 +1,13 @@
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
-export const metadata = {
+import { generateSEO } from '@/lib/seo';
+
+export const metadata = generateSEO({
   title: "Privacy Policy",
   description: "MN Legal's Privacy Policy and data protection standards in compliance with Kenya's Data Protection Act.",
-};
+  path: "/privacy",
+});
 
 export default function PrivacyPolicy() {
   return (

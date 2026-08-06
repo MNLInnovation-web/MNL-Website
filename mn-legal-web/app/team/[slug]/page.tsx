@@ -13,16 +13,20 @@ interface Props {
   params: Promise<{ slug: string }>;
 }
 
+import { generateSEO } from '@/lib/seo';
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const member = getTeamMemberBySlug(slug);
 
   if (!member) return { title: 'Team Member Not Found' };
 
-  return {
+  return generateSEO({
     title: `${member.name} | ${member.title}`,
     description: member.bio.substring(0, 160),
-  };
+    path: `/team/${slug}`,
+    ogImage: member.image,
+  });
 }
 
 export async function generateStaticParams() {
@@ -44,19 +48,34 @@ export default async function TeamMemberPage({ params }: Props) {
 
   const schemaJson = {
     "@context": "https://schema.org",
-    "@type": "Person",
-    "@id": `https://www.mnlegal.net/team/${member.slug}`,
-    "name": member.name,
-    "jobTitle": member.title,
-    "worksFor": {
-      "@type": "LegalService",
-      "name": "MN Advocates LLP",
-      "url": "https://www.mnlegal.net"
-    },
-    ...(member.email ? { "email": member.email } : {}),
-    ...(member.phone ? { "telephone": member.phone } : {}),
-    "image": member.image,
-    "url": `https://www.mnlegal.net/team/${member.slug}`
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": `https://mnlegal.net/team/${member.slug}#person`,
+        "name": member.name,
+        "jobTitle": member.title,
+        "worksFor": {
+          "@id": "https://mnlegal.net/#organization"
+        },
+        "affiliation": {
+          "@id": "https://mnlegal.net/#organization"
+        },
+        ...(member.email ? { "email": member.email } : {}),
+        ...(member.phone ? { "telephone": member.phone } : {}),
+        "image": member.image,
+        "url": `https://mnlegal.net/team/${member.slug}`,
+        "description": member.bio,
+        "sameAs": member.linkedIn ? [member.linkedIn] : []
+      },
+      {
+        "@type": "WebPage",
+        "@id": `https://mnlegal.net/team/${member.slug}#webpage`,
+        "url": `https://mnlegal.net/team/${member.slug}`,
+        "name": `${member.name} - ${member.title} | MN Advocates LLP`,
+        "isPartOf": { "@id": "https://mnlegal.net/#website" },
+        "about": { "@id": `https://mnlegal.net/team/${member.slug}#person` }
+      }
+    ]
   };
 
   return (
@@ -71,7 +90,7 @@ export default async function TeamMemberPage({ params }: Props) {
       <section className="pt-32 pb-6 px-6 md:px-16 bg-[var(--mn-cream)] border-b border-[var(--mn-burgundy)]/5">
         <div className="max-w-[1400px] mx-auto">
           <Link 
-            href="/#team" 
+            href="/team"
             className="inline-flex items-center text-[11px] uppercase font-bold text-[var(--mn-burgundy)] tracking-widest hover:gap-2 transition-all"
           >
             <ArrowLeft size={12} className="mr-2" /> Back to Team
@@ -155,12 +174,12 @@ export default async function TeamMemberPage({ params }: Props) {
                   <p className="text-white/80 text-[14px] leading-relaxed mb-6 font-medium">
                     {member.name} is a key facilitator for panel debates and private advisory roundtables at our upcoming flagship summit in Nairobi. Connect directly to request delegate access or agenda coordination.
                   </p>
-                  <a 
-                    href="#contact" 
+                  <Link
+                    href="/contact"
                     className="inline-flex items-center text-[11px] uppercase font-bold text-[var(--mn-burgundy)] tracking-widest hover:text-white transition-colors border-b border-[var(--mn-burgundy)] pb-1"
                   >
                     Request Summit Invitation &rarr;
-                  </a>
+                  </Link>
                 </div>
               )}
 

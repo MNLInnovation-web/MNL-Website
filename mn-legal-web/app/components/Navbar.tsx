@@ -2,21 +2,22 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-
+import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 
 const navLinks = [
   { label: 'Home',           href: '/' },
-  { label: 'Practice Areas', href: '/#practice' },
-  { label: 'About',          href: '/#about' },
-  { label: 'Our Team',       href: '/#team' },
+  { label: 'Practice Areas', href: '/practice-areas' },
+  { label: 'About',          href: '/about' },
+  { label: 'Our Team',       href: '/team' },
   { label: 'Insights',       href: '/insights' },
-  { label: 'Contact',        href: '/#contact' },
+  { label: 'Contact',        href: '/contact' },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,7 +27,8 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-
+  const isSubpage = pathname !== '/';
+  const isLightHeader = isSubpage && !scrolled;
 
   return (
     <nav 
@@ -52,7 +54,9 @@ export default function Navbar() {
           <li key={label}>
             <Link 
               href={href}
-              className="text-[11px] font-medium tracking-[1.2px] uppercase transition-colors duration-300 relative pb-[4px] after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-[1px] after:bg-[var(--mn-burgundy)] after:transition-all after:duration-400 after:ease-[var(--ease-expo)] text-white/70 hover:text-white after:w-0 hover:after:w-full"
+              className={`text-[11px] font-medium tracking-[1.2px] uppercase transition-colors duration-300 relative pb-[4px] after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-[1px] after:bg-[var(--mn-burgundy)] after:transition-all after:duration-400 after:ease-[var(--ease-expo)] after:w-0 hover:after:w-full ${
+                isLightHeader ? 'text-neutral-800/70 hover:text-neutral-900' : 'text-white/70 hover:text-white'
+              }`}
             >
               {label}
             </Link>
@@ -63,7 +67,7 @@ export default function Navbar() {
       <div className="flex items-center gap-2 md:gap-4">
         <button 
           className="nav-btn hidden md:block bg-[var(--mn-burgundy)] border-2 border-[var(--mn-burgundy)] text-white p-[10px_26px] text-[11px] font-semibold tracking-[1.5px] uppercase relative overflow-hidden group"
-          onClick={() => window.location.href = '/#contact'}
+          onClick={() => window.location.href = '/contact'}
         >
           <span className="relative z-10">Consult Now</span>
           <div className="absolute inset-0 bg-[var(--mn-burgundy-dark)] translate-x-[-101%] transition-transform duration-500 ease-[var(--ease-expo)] group-hover:translate-x-0"></div>
@@ -72,16 +76,22 @@ export default function Navbar() {
         <button 
           className={`nav-ham md:hidden flex flex-col gap-[5px] p-[4px] ml-2 relative z-[1001] ${isOpen ? 'open' : ''}`}
           onClick={() => setIsOpen(!isOpen)}
-          aria-label="Menu"
+          aria-label="Toggle Navigation Menu"
+          aria-expanded={isOpen}
+          aria-controls="mobile-navigation-menu"
         >
-          <span className={`block w-[22px] h-[1.5px] bg-white transition-all duration-400 ease-[var(--ease-expo)] ${isOpen ? 'translate-y-[6.5px] rotate-45' : ''}`}></span>
-          <span className={`block w-[22px] h-[1.5px] bg-white transition-opacity duration-300 ${isOpen ? 'opacity-0' : 'opacity-100'}`}></span>
-          <span className={`block w-[22px] h-[1.5px] bg-white transition-all duration-400 ease-[var(--ease-expo)] ${isOpen ? 'translate-y-[-6.5px] -rotate-45' : ''}`}></span>
+          <span className={`block w-[22px] h-[1.5px] transition-all duration-400 ease-[var(--ease-expo)] ${isOpen ? 'translate-y-[6.5px] rotate-45' : ''} ${isLightHeader ? 'bg-neutral-800' : 'bg-white'}`}></span>
+          <span className={`block w-[22px] h-[1.5px] transition-opacity duration-300 ${isOpen ? 'opacity-0' : 'opacity-100'} ${isLightHeader ? 'bg-neutral-800' : 'bg-white'}`}></span>
+          <span className={`block w-[22px] h-[1.5px] transition-all duration-400 ease-[var(--ease-expo)] ${isOpen ? 'translate-y-[-6.5px] -rotate-45' : ''} ${isLightHeader ? 'bg-neutral-800' : 'bg-white'}`}></span>
         </button>
       </div>
 
       {/* Mobile Menu */}
-      <div className={`fixed inset-0 bg-[var(--mn-navy-deep)] transition-transform duration-500 ease-[var(--ease-expo)] md:hidden flex flex-col items-center justify-center gap-8 ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+      <div
+        id="mobile-navigation-menu"
+        aria-hidden={!isOpen}
+        className={`fixed inset-0 bg-[var(--mn-navy-deep)] transition-transform duration-500 ease-[var(--ease-expo)] md:hidden flex flex-col items-center justify-center gap-8 ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
+      >
          {navLinks.map(({ label, href }) => (
            <Link 
              key={label} 

@@ -14,7 +14,7 @@ export default function ArticleCTA({ category, title }: ArticleCTAProps) {
         event_category: 'conversion',
         event_label: title,
         category: category,
-        destination: '/#contact'
+        destination: '/contact'
       });
     }
   };
@@ -28,7 +28,7 @@ export default function ArticleCTA({ category, title }: ArticleCTAProps) {
         <h3 className="font-display italic text-3xl text-white mb-4 border-none p-0">Need legal advice on this topic?</h3>
         <p className="text-white/60 text-base mb-8">Our {category} team is ready to help you navigate the complexities of Kenyan law.</p>
         <Link 
-          href="/#contact" 
+          href="/contact"
           onClick={handleClick}
           className="inline-block bg-[var(--mn-burgundy)] px-10 py-4 text-[11px] font-bold uppercase tracking-widest hover:bg-[var(--mn-burgundy-dark)] transition-all"
         >

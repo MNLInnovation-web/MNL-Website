@@ -12,15 +12,22 @@ interface Props {
   params: Promise<{ slug: string }>;
 }
 
+import { generateSEO } from '@/lib/seo';
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const area = getPracticeAreaBySlug(slug);
 
   if (!area) return { title: 'Practice Area Not Found' };
 
-  return {
+  const baseMeta = generateSEO({
     title: area.seoTitle,
     description: area.longDescription.substring(0, 160),
+    path: `/practice-areas/${slug}`,
+  });
+
+  return {
+    ...baseMeta,
     keywords: area.keywords.join(', '),
   };
 }
@@ -68,23 +75,35 @@ export default async function PracticeAreaPage({ params }: Props) {
 
   const schemaJson = {
     "@context": "https://schema.org",
-    "@type": "LegalService",
-    "@id": `https://www.mnlegal.net/practice-areas/${area.slug}`,
-    "name": area.title,
-    "description": area.description,
-    "url": `https://www.mnlegal.net/practice-areas/${area.slug}`,
-    "telephone": "+254 700 325 089",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Global Center, 1st Floor, CBC Building, Off Argwings Kodhek Road, Kilimani",
-      "addressLocality": "Nairobi",
-      "addressCountry": "KE"
-    },
-    "provider": {
-      "@type": "Organization",
-      "name": "MN Advocates LLP",
-      "url": "https://www.mnlegal.net"
-    }
+    "@graph": [
+      {
+        "@type": "LegalService",
+        "@id": "https://mnlegal.net/#legalservice"
+      },
+      {
+        "@type": "WebPage",
+        "@id": `https://mnlegal.net/practice-areas/${area.slug}#webpage`,
+        "url": `https://mnlegal.net/practice-areas/${area.slug}`,
+        "name": `${area.seoTitle} | MN Advocates LLP`,
+        "isPartOf": { "@id": "https://mnlegal.net/#website" },
+        "description": area.description
+      },
+      {
+        "@type": "OfferCatalog",
+        "@id": `https://mnlegal.net/practice-areas/${area.slug}#catalog`,
+        "name": area.title,
+        "description": area.longDescription,
+        "itemListElement": area.whatWeCover.map((service, index) => ({
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": service,
+            "description": `Professional ${service} legal counsel from MN Advocates LLP in Nairobi, Kenya.`,
+            "provider": { "@id": "https://mnlegal.net/#legalservice" }
+          }
+        }))
+      }
+    ]
   };
 
   return (

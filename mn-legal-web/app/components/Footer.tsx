@@ -45,10 +45,18 @@ export default async function Footer() {
         <div>
           <div className="foot-col-ttl text-[10px] font-semibold tracking-[2.5px] uppercase text-white/30 mb-[20px]">Practice Areas</div>
           <ul className="foot-links flex flex-col gap-[11px]">
-            {['Corporate & Commercial', 'Litigation', 'Conveyancing', 'Employment Law', 'Banking & Finance', 'Intellectual Property'].map((link: string) => (
-              <li key={link}>
-                <Link href="/#practice" className="text-[13px] text-white/50 transition-colors duration-300 hover:text-white/85">
-                  {link}
+            {[
+              { name: 'Data Privacy & Protection', slug: 'data-privacy' },
+              { name: 'Corporate & Commercial', slug: 'corporate-commercial' },
+              { name: 'Litigation & Dispute Resolution', slug: 'litigation-dispute-resolution' },
+              { name: 'Conveyancing & Property', slug: 'conveyancing-property' },
+              { name: 'Banking & Finance (Fintech)', slug: 'banking-finance-fintech' },
+              { name: 'Intellectual Property', slug: 'intellectual-property' },
+              { name: 'Employment & Labour', slug: 'employment-labour' }
+            ].map((item) => (
+              <li key={item.slug}>
+                <Link href={`/practice-areas/${item.slug}`} className="text-[13px] text-white/50 transition-colors duration-300 hover:text-white/85">
+                  {item.name}
                 </Link>
               </li>
             ))}

@@ -13,6 +13,17 @@ interface SearchPageProps {
   searchParams: Promise<{ q?: string }>;
 }
 
+import { generateSEO } from '@/lib/seo';
+
+export const metadata = {
+  ...generateSEO({
+    title: 'Search Legal Insights | MN Advocates LLP',
+    description: 'Search our comprehensive archive of legal insights, regulatory briefings, and technology governance analysis.',
+    path: '/insights/search',
+    noIndex: true, // Do not index internal search results pages to optimize crawl budget
+  }),
+};
+
 export default async function SearchResultsPage({ searchParams }: SearchPageProps) {
   const resolvedSearchParams = await searchParams;
   const query = resolvedSearchParams.q || '';

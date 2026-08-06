@@ -22,6 +22,8 @@ export async function generateStaticParams() {
   return posts.map((post: any) => ({ slug: post.slug }));
 }
 
+import { generateSEO } from '@/lib/seo';
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const wpPost = await getPostBySlug(slug);
@@ -32,26 +34,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const imageUrl = wpPost.featuredImage?.node?.sourceUrl || '/og-image.jpg';
   const excerpt = post.excerpt?.substring(0, 160) || post.title;
 
-  return {
-    title: post.title,
+  return generateSEO({
+    title: `${post.title} | MN Advocates LLP`,
     description: excerpt,
-    alternates: { canonical: `/insights/${slug}` },
-    openGraph: {
-      title: post.title,
-      description: excerpt,
-      url: `https://mnlegal.net/insights/${slug}`,
-      type: 'article',
-      publishedTime: wpPost.date,
-      authors: [post.author.name],
-      images: [{ url: imageUrl, width: 1200, height: 630, alt: post.title }],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: post.title,
-      description: excerpt,
-      images: [imageUrl],
-    },
-  };
+    path: `/insights/${slug}`,
+    ogType: 'article',
+    ogImage: imageUrl,
+  });
 }
 
 export default async function SingleArticle({ params }: PageProps) {

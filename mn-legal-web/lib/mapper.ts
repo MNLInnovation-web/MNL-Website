@@ -56,15 +56,65 @@ export function mapWPPostToPost(wpPost: any): Post {
       roleLink: 'https://atomiqconsulting.com/'
     },
     'zachary ongeri': {
-      role: 'AI Associate'
+      role: 'AI Associate',
+      roleLink: '/team/zachary-ongeri'
+    },
+    'mbula nzuki': {
+      role: 'Founder & Managing Partner',
+      roleLink: '/team/mbula-nzuki'
+    },
+    'sebie salim': {
+      role: 'Chief Operations, Strategy & Growth',
+      roleLink: '/team/sebie-salim'
+    },
+    'mutundu chege': {
+      role: 'Litigation Department, Co-Head',
+      roleLink: '/team/mutundu-chege'
+    },
+    'konstantina zariou': {
+      role: 'Of Counsel - London',
+      roleLink: '/team/konstantina-zariou'
+    },
+    'husna mohammed': {
+      role: 'Senior Associate',
+      roleLink: '/team/husna-mohammed'
+    },
+    'nour sheriff': {
+      role: 'Associate',
+      roleLink: '/team/nour-sheriff'
+    },
+    'tyrus muya kamau': {
+      role: 'Head of Cybersecurity',
+      roleLink: '/team/tyrus-muya-kamau'
+    },
+    'keziah mwangi': {
+      role: 'HRM and Tax Associate',
+      roleLink: '/team/keziah-mwangi'
+    },
+    'nahashon muhari': {
+      role: 'Digital Marketing & Communications Lead',
+      roleLink: '/team/nahashon-muhari'
     }
   };
 
-  const authorNameLower = authorName.toLowerCase();
+  const authorNameLower = authorName.toLowerCase().replace(/\s+a\.\s+/g, ' ').trim();
   const override = authorOverrides[authorNameLower];
 
   const authorRole = override ? override.role : (authorNode.description ? 'Senior Advocate' : 'Advocate');
-  const authorRoleLink = override?.roleLink;
+
+  // Standardize mapping to team page if they exist in team database
+  let authorRoleLink = override?.roleLink;
+  if (!authorRoleLink) {
+    const knownSlugs = [
+      'mbula-nzuki', 'sebie-salim', 'mutundu-chege', 'konstantina-zariou',
+      'husna-mohammed', 'zachary-ongeri', 'nour-sheriff', 'tyrus-muya-kamau',
+      'keziah-mwangi', 'nahashon-muhari'
+    ];
+    const computedSlug = authorNameLower.replace(/\s+/g, '-');
+    if (knownSlugs.includes(computedSlug)) {
+      authorRoleLink = `/team/${computedSlug}`;
+    }
+  }
 
   const authorAvatar = authorNode.avatar?.url || 'https://via.placeholder.com/150';
   const authorBio = authorNode.description || '';

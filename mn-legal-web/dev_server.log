@@ -1,0 +1,42 @@
+
+> mn-legal-web@0.1.0 dev
+> next dev
+
+   ▲ Next.js 15.5.12
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.0.2:3000
+
+ ✓ Starting...
+ ✓ Ready in 1890ms
+ ○ Compiling / ...
+ ✓ Compiled / in 9.2s (795 modules)
+[TypeError: fetch failed] {
+  [cause]: [AggregateError: ] { code: 'ETIMEDOUT' }
+}
+[TypeError: fetch failed] {
+  [cause]: [AggregateError: ] { code: 'ETIMEDOUT' }
+}
+[TypeError: fetch failed] {
+  [cause]: [AggregateError: ] { code: 'ETIMEDOUT' }
+}
+ GET / 200 in 11293ms
+ ○ Compiling /about ...
+ ✓ Compiled /about in 952ms (785 modules)
+ GET /about 200 in 1221ms
+ GET /about 200 in 121ms
+ ✓ Compiled /practice-areas in 502ms (777 modules)
+ GET /practice-areas 200 in 659ms
+ ✓ Compiled /team in 439ms (783 modules)
+ GET /team 200 in 608ms
+ ✓ Compiled /contact in 439ms (788 modules)
+ GET /contact 200 in 586ms
+ ✓ Compiled in 1513ms (783 modules)
+ GET / 200 in 814ms
+ ✓ Compiled /about in 474ms (479 modules)
+ GET /about 200 in 722ms
+ ✓ Compiled /practice-areas in 171ms (484 modules)
+ GET /practice-areas 200 in 310ms
+ ✓ Compiled /team in 191ms (489 modules)
+ GET /team 200 in 341ms
+ ✓ Compiled /contact in 272ms (493 modules)
+ GET /contact 200 in 426ms

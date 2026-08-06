@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   },
   metadataBase: new URL("https://mnlegal.net"),
   alternates: {
-    canonical: "/",
+    canonical: "https://mnlegal.net",
   },
   icons: {
     icon: [
@@ -102,13 +102,26 @@ export default function RootLayout({
           `}
         </Script>
 
-        {/* Structured Data — LegalService + Organization (appears on every page) */}
+        {/* Structured Data — WebSite, LegalService + Organization (appears on every page) */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@graph": [
+                {
+                  "@type": "WebSite",
+                  "@id": "https://mnlegal.net/#website",
+                  "url": "https://mnlegal.net",
+                  "name": "MN Legal",
+                  "alternateName": "MN Advocates LLP",
+                  "publisher": { "@id": "https://mnlegal.net/#organization" },
+                  "potentialAction": {
+                    "@type": "SearchAction",
+                    "target": "https://mnlegal.net/insights/search?q={search_term_string}",
+                    "query-input": "required name=search_term_string"
+                  }
+                },
                 {
                   "@type": "LegalService",
                   "@id": "https://mnlegal.net/#legalservice",

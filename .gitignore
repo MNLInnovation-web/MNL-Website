@@ -1,0 +1,11 @@
+# local logs & test artifacts
+dev_server.log
+*.log
+/test-results/
+
+# dependencies
+node_modules/
+
+# env
+.env
+.env.local

@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next'
- 
+import { SITE_URL } from '@/lib/seo'
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
@@ -7,6 +8,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/private/', '/admin/'],
     },
-    sitemap: 'https://mnlegal.net/sitemap.xml',
+    sitemap: `${SITE_URL}/sitemap.xml`,
   }
 }

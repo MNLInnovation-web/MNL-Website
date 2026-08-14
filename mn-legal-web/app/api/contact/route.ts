@@ -24,16 +24,39 @@ const contactFormSchema = z.object({
   contactPreference: z.string().max(50).optional().or(z.literal('')),
 });
 
+/**
+ * Escapes HTML-significant characters so submitted values cannot inject markup
+ * into the emails staff read. Zod validates shape and length, not content.
+ */
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 function firmNotificationHtml(
-  fullName: string, 
-  email: string, 
-  matterType: string, 
-  summary: string,
-  companyName?: string,
-  jobTitle?: string,
-  phone?: string,
-  contactPreference?: string
+  rawFullName: string,
+  rawEmail: string,
+  rawMatterType: string,
+  rawSummary: string,
+  rawCompanyName?: string,
+  rawJobTitle?: string,
+  rawPhone?: string,
+  rawContactPreference?: string
 ): string {
+  // Escape once at the boundary — every ${} below is safe from here on.
+  const fullName = escapeHtml(rawFullName);
+  const email = escapeHtml(rawEmail);
+  const matterType = escapeHtml(rawMatterType);
+  const summary = escapeHtml(rawSummary);
+  const companyName = rawCompanyName ? escapeHtml(rawCompanyName) : rawCompanyName;
+  const jobTitle = rawJobTitle ? escapeHtml(rawJobTitle) : rawJobTitle;
+  const phone = rawPhone ? escapeHtml(rawPhone) : rawPhone;
+  const contactPreference = rawContactPreference ? escapeHtml(rawContactPreference) : rawContactPreference;
+
   const timestamp = new Date().toLocaleString('en-GB', {
     day: 'numeric', month: 'long', year: 'numeric',
     hour: '2-digit', minute: '2-digit', timeZoneName: 'short'
@@ -222,7 +245,11 @@ function firmNotificationHtml(
 </html>`;
 }
 
-function clientConfirmationHtml(fullName: string, matterType: string, summary: string): string {
+function clientConfirmationHtml(rawFullName: string, rawMatterType: string, rawSummary: string): string {
+  const fullName = escapeHtml(rawFullName);
+  const matterType = escapeHtml(rawMatterType);
+  const summary = escapeHtml(rawSummary);
+
   const firstName = fullName.split(' ')[0];
 
   return `<!DOCTYPE html>
@@ -365,8 +392,49 @@ function clientConfirmationHtml(fullName: string, matterType: string, summary: s
 </html>`;
 }
 
+// ── RATE LIMITING ──
+// In-memory fixed window, keyed by client IP. This is per-instance and resets
+// on cold start, so it is a speed bump against scripted abuse rather than a
+// hard guarantee — a shared store (Upstash/Redis) is the durable fix.
+const RATE_LIMIT_MAX = 5;
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000; // 10 minutes
+const rateLimitBuckets = new Map<string, { count: number; expiresAt: number }>();
+
+function getClientIp(req: NextRequest): string {
+  const forwarded = req.headers.get('x-forwarded-for');
+  if (forwarded) return forwarded.split(',')[0].trim();
+  return req.headers.get('x-real-ip') || 'unknown';
+}
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+
+  // Opportunistic cleanup so the map cannot grow without bound.
+  for (const [key, bucket] of rateLimitBuckets) {
+    if (bucket.expiresAt <= now) rateLimitBuckets.delete(key);
+  }
+
+  const existing = rateLimitBuckets.get(ip);
+  if (!existing || existing.expiresAt <= now) {
+    rateLimitBuckets.set(ip, { count: 1, expiresAt: now + RATE_LIMIT_WINDOW_MS });
+    return false;
+  }
+
+  existing.count += 1;
+  return existing.count > RATE_LIMIT_MAX;
+}
+
 export async function POST(req: NextRequest) {
   try {
+    // ── RATE LIMIT GUARD ──
+    const clientIp = getClientIp(req);
+    if (isRateLimited(clientIp)) {
+      return NextResponse.json(
+        { error: 'Too many requests. Please try again in a few minutes.' },
+        { status: 429, headers: { 'Retry-After': String(RATE_LIMIT_WINDOW_MS / 1000) } }
+      );
+    }
+
     const body = await req.json();
 
     // ── SERVER-SIDE VALIDATION (Zod) ──
@@ -410,8 +478,12 @@ export async function POST(req: NextRequest) {
     });
 
     if (error) {
+      // Detail stays server-side; the client gets nothing about our mail provider.
       console.error('Resend error:', error);
-      return NextResponse.json({ error: `Resend: ${error.message || JSON.stringify(error)}` }, { status: 500 });
+      return NextResponse.json(
+        { error: 'We could not send your inquiry right now. Please try again, or email info@mnlegal.net directly.' },
+        { status: 500 }
+      );
     }
 
     // ── CLIENT CONFIRMATION ──
@@ -426,6 +498,9 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ success: true, data }, { status: 200 });
   } catch (err: any) {
     console.error('Contact route caught error:', err);
-    return NextResponse.json({ error: `Internal: ${err?.message || String(err)}` }, { status: 500 });
+    return NextResponse.json(
+      { error: 'Something went wrong on our end. Please try again, or email info@mnlegal.net directly.' },
+      { status: 500 }
+    );
   }
 }

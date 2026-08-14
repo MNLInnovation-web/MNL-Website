@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://mnlegal.net';
+// Must match the host actually served in production (www), otherwise every
+// canonical/og:url points at the apex, which only 30x-redirects back to www.
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.mnlegal.net';
 
 /**
  * Normalizes a URL path to prevent duplicate content:

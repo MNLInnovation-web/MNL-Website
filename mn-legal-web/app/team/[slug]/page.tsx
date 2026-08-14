@@ -51,29 +51,29 @@ export default async function TeamMemberPage({ params }: Props) {
     "@graph": [
       {
         "@type": "Person",
-        "@id": `https://mnlegal.net/team/${member.slug}#person`,
+        "@id": `https://www.mnlegal.net/team/${member.slug}#person`,
         "name": member.name,
         "jobTitle": member.title,
         "worksFor": {
-          "@id": "https://mnlegal.net/#organization"
+          "@id": "https://www.mnlegal.net/#organization"
         },
         "affiliation": {
-          "@id": "https://mnlegal.net/#organization"
+          "@id": "https://www.mnlegal.net/#organization"
         },
         ...(member.email ? { "email": member.email } : {}),
         ...(member.phone ? { "telephone": member.phone } : {}),
         "image": member.image,
-        "url": `https://mnlegal.net/team/${member.slug}`,
+        "url": `https://www.mnlegal.net/team/${member.slug}`,
         "description": member.bio,
         "sameAs": member.linkedIn ? [member.linkedIn] : []
       },
       {
         "@type": "WebPage",
-        "@id": `https://mnlegal.net/team/${member.slug}#webpage`,
-        "url": `https://mnlegal.net/team/${member.slug}`,
+        "@id": `https://www.mnlegal.net/team/${member.slug}#webpage`,
+        "url": `https://www.mnlegal.net/team/${member.slug}`,
         "name": `${member.name} - ${member.title} | MN Advocates LLP`,
-        "isPartOf": { "@id": "https://mnlegal.net/#website" },
-        "about": { "@id": `https://mnlegal.net/team/${member.slug}#person` }
+        "isPartOf": { "@id": "https://www.mnlegal.net/#website" },
+        "about": { "@id": `https://www.mnlegal.net/team/${member.slug}#person` }
       }
     ]
   };

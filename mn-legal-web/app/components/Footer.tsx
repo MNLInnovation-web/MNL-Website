@@ -96,7 +96,7 @@ export default async function Footer() {
                 </a>
               </li>
               <li>
-                <a href="https://mnlegal.net" itemProp="url" className="text-[13px] text-white/50 transition-colors duration-300 hover:text-white/85" target="_blank" rel="noopener">
+                <a href="https://www.mnlegal.net" itemProp="url" className="text-[13px] text-white/50 transition-colors duration-300 hover:text-white/85" target="_blank" rel="noopener">
                   mnlegal.net
                 </a>
               </li>

@@ -16,18 +16,18 @@ export default function ContactPage() {
     "@graph": [
       {
         "@type": "WebPage",
-        "@id": "https://mnlegal.net/contact#webpage",
-        "url": "https://mnlegal.net/contact",
+        "@id": "https://www.mnlegal.net/contact#webpage",
+        "url": "https://www.mnlegal.net/contact",
         "name": "Contact & Consultation | MN Advocates LLP",
-        "isPartOf": { "@id": "https://mnlegal.net/#website" },
+        "isPartOf": { "@id": "https://www.mnlegal.net/#website" },
         "description": "Get in touch with Kenya's leading legal-tech and corporate lawyers for a private consultation."
       },
       {
         "@type": "ContactPage",
-        "@id": "https://mnlegal.net/contact#contactpage",
-        "url": "https://mnlegal.net/contact",
+        "@id": "https://www.mnlegal.net/contact#contactpage",
+        "url": "https://www.mnlegal.net/contact",
         "name": "MN Legal Contacts",
-        "mainEntity": { "@id": "https://mnlegal.net/#legalservice" }
+        "mainEntity": { "@id": "https://www.mnlegal.net/#legalservice" }
       }
     ]
   };

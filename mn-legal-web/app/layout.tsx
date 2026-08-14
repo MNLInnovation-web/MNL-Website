@@ -4,6 +4,7 @@ import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "./components/SmoothScroll";
 import { ThemeProvider } from "./components/ThemeProvider";
+import { SITE_URL } from "@/lib/seo";
 
 const playfair = Playfair_Display({
   variable: "--font-display",
@@ -33,9 +34,9 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://mnlegal.net"),
+  metadataBase: new URL(SITE_URL),
   alternates: {
-    canonical: "https://mnlegal.net",
+    canonical: SITE_URL,
   },
   icons: {
     icon: [
@@ -51,7 +52,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "MN Legal - Leading Legal Tech & Data Privacy Firm Kenya",
     description: "Expert legal counsel in Data Protection, AI Governance, and Corporate Commercial Law. Based in Nairobi, serving East Africa.",
-    url: "https://mnlegal.net",
+    url: SITE_URL,
     siteName: "MN Legal",
     locale: "en_KE",
     type: "website",
@@ -111,26 +112,26 @@ export default function RootLayout({
               "@graph": [
                 {
                   "@type": "WebSite",
-                  "@id": "https://mnlegal.net/#website",
-                  "url": "https://mnlegal.net",
+                  "@id": "https://www.mnlegal.net/#website",
+                  "url": "https://www.mnlegal.net",
                   "name": "MN Legal",
                   "alternateName": "MN Advocates LLP",
-                  "publisher": { "@id": "https://mnlegal.net/#organization" },
+                  "publisher": { "@id": "https://www.mnlegal.net/#organization" },
                   "potentialAction": {
                     "@type": "SearchAction",
-                    "target": "https://mnlegal.net/insights/search?q={search_term_string}",
+                    "target": "https://www.mnlegal.net/insights/search?q={search_term_string}",
                     "query-input": "required name=search_term_string"
                   }
                 },
                 {
                   "@type": "LegalService",
-                  "@id": "https://mnlegal.net/#legalservice",
+                  "@id": "https://www.mnlegal.net/#legalservice",
                   "name": "MN Legal",
                   "alternateName": "MN Advocates LLP",
-                  "url": "https://mnlegal.net",
+                  "url": "https://www.mnlegal.net",
                   "logo": {
                     "@type": "ImageObject",
-                    "url": "https://mnlegal.net/og-image.jpg",
+                    "url": "https://www.mnlegal.net/og-image.jpg",
                     "width": 1200,
                     "height": 630
                   },
@@ -171,22 +172,22 @@ export default function RootLayout({
                 },
                 {
                   "@type": "Organization",
-                  "@id": "https://mnlegal.net/#organization",
+                  "@id": "https://www.mnlegal.net/#organization",
                   "name": "MN Advocates LLP",
-                  "url": "https://mnlegal.net",
-                  "logo": "https://mnlegal.net/og-image.jpg",
+                  "url": "https://www.mnlegal.net",
+                  "logo": "https://www.mnlegal.net/og-image.jpg",
                   "foundingLocation": { "@type": "Place", "name": "Nairobi, Kenya" },
                   "employee": [
-                    { "@type": "Person", "name": "Mbula Nzuki", "jobTitle": "Founder & Managing Partner", "url": "https://mnlegal.net/team/mbula-nzuki", "sameAs": "https://www.linkedin.com/in/mbulanzuki/", "worksFor": { "@id": "https://mnlegal.net/#organization" } },
-                    { "@type": "Person", "name": "Sebie Salim", "jobTitle": "Chief Operations, Strategy & Growth", "url": "https://mnlegal.net/team/sebie-salim", "sameAs": "https://www.linkedin.com/in/sebie/", "worksFor": { "@id": "https://mnlegal.net/#organization" } },
-                    { "@type": "Person", "name": "Mutundu Chege", "jobTitle": "Litigation Department, Co-Head", "url": "https://mnlegal.net/team/mutundu-chege", "worksFor": { "@id": "https://mnlegal.net/#organization" } },
-                    { "@type": "Person", "name": "Konstantina Zariou", "jobTitle": "Of Counsel - London", "url": "https://mnlegal.net/team/konstantina-zariou", "sameAs": "https://www.linkedin.com/in/konstantina-zariou-aciarb/", "worksFor": { "@id": "https://mnlegal.net/#organization" } },
-                    { "@type": "Person", "name": "Husna Mohammed", "jobTitle": "Senior Associate", "url": "https://mnlegal.net/team/husna-mohammed", "sameAs": "https://www.linkedin.com/in/husna-mohammed-94686317b/", "worksFor": { "@id": "https://mnlegal.net/#organization" } },
-                    { "@type": "Person", "name": "Zachary Ongeri", "jobTitle": "AI & Digital Transformation Associate", "url": "https://mnlegal.net/team/zachary-ongeri", "worksFor": { "@id": "https://mnlegal.net/#organization" } },
-                    { "@type": "Person", "name": "Nour Sheriff", "jobTitle": "Associate", "url": "https://mnlegal.net/team/nour-sheriff", "sameAs": "https://www.linkedin.com/in/nour-sherif-%E4%B9%90-%E6%98%8E-7a59b6118/", "worksFor": { "@id": "https://mnlegal.net/#organization" } },
-                    { "@type": "Person", "name": "Tyrus Muya Kamau", "jobTitle": "Head of Cybersecurity", "url": "https://mnlegal.net/team/tyrus-muya-kamau", "sameAs": "https://www.linkedin.com/in/tyruskamau/", "worksFor": { "@id": "https://mnlegal.net/#organization" } },
-                    { "@type": "Person", "name": "Keziah Mwangi", "jobTitle": "HRM and Tax Associate", "url": "https://mnlegal.net/team/keziah-mwangi", "sameAs": "https://www.linkedin.com/in/keziah-mwangi/", "worksFor": { "@id": "https://mnlegal.net/#organization" } },
-                    { "@type": "Person", "name": "Nahashon Ian Muhari", "jobTitle": "Digital Marketing & Communications Lead", "url": "https://mnlegal.net/team/nahashon-muhari", "sameAs": "https://www.linkedin.com/in/nahashon-muhari-474a0628b/", "worksFor": { "@id": "https://mnlegal.net/#organization" } }
+                    { "@type": "Person", "name": "Mbula Nzuki", "jobTitle": "Founder & Managing Partner", "url": "https://www.mnlegal.net/team/mbula-nzuki", "sameAs": "https://www.linkedin.com/in/mbulanzuki/", "worksFor": { "@id": "https://www.mnlegal.net/#organization" } },
+                    { "@type": "Person", "name": "Sebie Salim", "jobTitle": "Chief Operations, Strategy & Growth", "url": "https://www.mnlegal.net/team/sebie-salim", "sameAs": "https://www.linkedin.com/in/sebie/", "worksFor": { "@id": "https://www.mnlegal.net/#organization" } },
+                    { "@type": "Person", "name": "Mutundu Chege", "jobTitle": "Litigation Department, Co-Head", "url": "https://www.mnlegal.net/team/mutundu-chege", "worksFor": { "@id": "https://www.mnlegal.net/#organization" } },
+                    { "@type": "Person", "name": "Konstantina Zariou", "jobTitle": "Of Counsel - London", "url": "https://www.mnlegal.net/team/konstantina-zariou", "sameAs": "https://www.linkedin.com/in/konstantina-zariou-aciarb/", "worksFor": { "@id": "https://www.mnlegal.net/#organization" } },
+                    { "@type": "Person", "name": "Husna Mohammed", "jobTitle": "Senior Associate", "url": "https://www.mnlegal.net/team/husna-mohammed", "sameAs": "https://www.linkedin.com/in/husna-mohammed-94686317b/", "worksFor": { "@id": "https://www.mnlegal.net/#organization" } },
+                    { "@type": "Person", "name": "Zachary Ongeri", "jobTitle": "AI & Digital Transformation Associate", "url": "https://www.mnlegal.net/team/zachary-ongeri", "worksFor": { "@id": "https://www.mnlegal.net/#organization" } },
+                    { "@type": "Person", "name": "Nour Sheriff", "jobTitle": "Associate", "url": "https://www.mnlegal.net/team/nour-sheriff", "sameAs": "https://www.linkedin.com/in/nour-sherif-%E4%B9%90-%E6%98%8E-7a59b6118/", "worksFor": { "@id": "https://www.mnlegal.net/#organization" } },
+                    { "@type": "Person", "name": "Tyrus Muya Kamau", "jobTitle": "Head of Cybersecurity", "url": "https://www.mnlegal.net/team/tyrus-muya-kamau", "sameAs": "https://www.linkedin.com/in/tyruskamau/", "worksFor": { "@id": "https://www.mnlegal.net/#organization" } },
+                    { "@type": "Person", "name": "Keziah Mwangi", "jobTitle": "HRM and Tax Associate", "url": "https://www.mnlegal.net/team/keziah-mwangi", "sameAs": "https://www.linkedin.com/in/keziah-mwangi/", "worksFor": { "@id": "https://www.mnlegal.net/#organization" } },
+                    { "@type": "Person", "name": "Nahashon Ian Muhari", "jobTitle": "Digital Marketing & Communications Lead", "url": "https://www.mnlegal.net/team/nahashon-muhari", "sameAs": "https://www.linkedin.com/in/nahashon-muhari-474a0628b/", "worksFor": { "@id": "https://www.mnlegal.net/#organization" } }
                   ],
                   "sameAs": [
                     "https://www.linkedin.com/company/mn-legal",

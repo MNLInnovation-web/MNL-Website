@@ -21,15 +21,15 @@ export default function TeamPage() {
     "@graph": [
       {
         "@type": "WebPage",
-        "@id": "https://mnlegal.net/team#webpage",
-        "url": "https://mnlegal.net/team",
+        "@id": "https://www.mnlegal.net/team#webpage",
+        "url": "https://www.mnlegal.net/team",
         "name": "Our Team of Legal Professionals | MN Advocates LLP",
-        "isPartOf": { "@id": "https://mnlegal.net/#website" },
+        "isPartOf": { "@id": "https://www.mnlegal.net/#website" },
         "description": "Meet the experienced advocates, partners, and legal technologists at MN Legal."
       },
       {
         "@type": "ItemList",
-        "@id": "https://mnlegal.net/team#teamlist",
+        "@id": "https://www.mnlegal.net/team#teamlist",
         "name": "MN Advocates LLP Legal Professionals",
         "numberOfItems": teamMembers.length,
         "itemListElement": teamMembers.map((member, index) => ({
@@ -39,7 +39,7 @@ export default function TeamPage() {
             "@type": "Person",
             "name": member.name,
             "jobTitle": member.title,
-            "url": `https://mnlegal.net/team/${member.slug}`,
+            "url": `https://www.mnlegal.net/team/${member.slug}`,
             "image": member.image
           }
         }))

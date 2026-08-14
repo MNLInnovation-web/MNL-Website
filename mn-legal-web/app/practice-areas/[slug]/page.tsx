@@ -78,19 +78,19 @@ export default async function PracticeAreaPage({ params }: Props) {
     "@graph": [
       {
         "@type": "LegalService",
-        "@id": "https://mnlegal.net/#legalservice"
+        "@id": "https://www.mnlegal.net/#legalservice"
       },
       {
         "@type": "WebPage",
-        "@id": `https://mnlegal.net/practice-areas/${area.slug}#webpage`,
-        "url": `https://mnlegal.net/practice-areas/${area.slug}`,
+        "@id": `https://www.mnlegal.net/practice-areas/${area.slug}#webpage`,
+        "url": `https://www.mnlegal.net/practice-areas/${area.slug}`,
         "name": `${area.seoTitle} | MN Advocates LLP`,
-        "isPartOf": { "@id": "https://mnlegal.net/#website" },
+        "isPartOf": { "@id": "https://www.mnlegal.net/#website" },
         "description": area.description
       },
       {
         "@type": "OfferCatalog",
-        "@id": `https://mnlegal.net/practice-areas/${area.slug}#catalog`,
+        "@id": `https://www.mnlegal.net/practice-areas/${area.slug}#catalog`,
         "name": area.title,
         "description": area.longDescription,
         "itemListElement": area.whatWeCover.map((service, index) => ({
@@ -99,7 +99,7 @@ export default async function PracticeAreaPage({ params }: Props) {
             "@type": "Service",
             "name": service,
             "description": `Professional ${service} legal counsel from MN Advocates LLP in Nairobi, Kenya.`,
-            "provider": { "@id": "https://mnlegal.net/#legalservice" }
+            "provider": { "@id": "https://www.mnlegal.net/#legalservice" }
           }
         }))
       }

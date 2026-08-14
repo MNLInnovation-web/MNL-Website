@@ -21,15 +21,15 @@ export default function PracticeAreasPage() {
     "@graph": [
       {
         "@type": "WebPage",
-        "@id": "https://mnlegal.net/practice-areas#webpage",
-        "url": "https://mnlegal.net/practice-areas",
+        "@id": "https://www.mnlegal.net/practice-areas#webpage",
+        "url": "https://www.mnlegal.net/practice-areas",
         "name": "Our Practice Areas & Legal Services | MN Advocates LLP",
-        "isPartOf": { "@id": "https://mnlegal.net/#website" },
+        "isPartOf": { "@id": "https://www.mnlegal.net/#website" },
         "description": "Explore MN Legal's specialized practice groups in Kenya and East Africa."
       },
       {
         "@type": "ItemList",
-        "@id": "https://mnlegal.net/practice-areas#servicelist",
+        "@id": "https://www.mnlegal.net/practice-areas#servicelist",
         "name": "MN Legal Practice Areas",
         "numberOfItems": practiceAreas.length,
         "itemListElement": practiceAreas.map((area, index) => ({
@@ -38,7 +38,7 @@ export default function PracticeAreasPage() {
           "item": {
             "@type": "Service",
             "name": area.title,
-            "url": `https://mnlegal.net/practice-areas/${area.slug}`,
+            "url": `https://www.mnlegal.net/practice-areas/${area.slug}`,
             "description": area.description
           }
         }))

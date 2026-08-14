@@ -21,10 +21,10 @@ export default function AboutPage() {
     "@graph": [
       {
         "@type": "WebPage",
-        "@id": "https://mnlegal.net/about#webpage",
-        "url": "https://mnlegal.net/about",
+        "@id": "https://www.mnlegal.net/about#webpage",
+        "url": "https://www.mnlegal.net/about",
         "name": "About Our Firm | MN Advocates LLP",
-        "isPartOf": { "@id": "https://mnlegal.net/#website" },
+        "isPartOf": { "@id": "https://www.mnlegal.net/#website" },
         "description": "Learn about MN Legal (MN Advocates LLP), a premier full-service law firm in Nairobi, Kenya."
       }
     ]

@@ -83,23 +83,23 @@ export default async function SingleArticle({ params }: PageProps) {
               "author": {
                 "@type": "Person",
                 "name": post.author.name,
-                "worksFor": { "@id": "https://mnlegal.net/#organization" }
+                "worksFor": { "@id": "https://www.mnlegal.net/#organization" }
               },
               "publisher": {
                 "@type": "Organization",
                 "name": "MN Legal",
-                "logo": { "@type": "ImageObject", "url": "https://mnlegal.net/og-image.jpg" }
+                "logo": { "@type": "ImageObject", "url": "https://www.mnlegal.net/og-image.jpg" }
               },
-              "mainEntityOfPage": { "@type": "WebPage", "@id": `https://mnlegal.net/insights/${post.slug}` }
+              "mainEntityOfPage": { "@type": "WebPage", "@id": `https://www.mnlegal.net/insights/${post.slug}` }
             },
             {
               "@context": "https://schema.org",
               "@type": "BreadcrumbList",
               "itemListElement": [
-                { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mnlegal.net" },
-                { "@type": "ListItem", "position": 2, "name": "Insights", "item": "https://mnlegal.net/insights" },
-                { "@type": "ListItem", "position": 3, "name": post.category, "item": `https://mnlegal.net/insights?category=${post.category.toLowerCase().replace(/\s+/g, '-')}` },
-                { "@type": "ListItem", "position": 4, "name": post.title, "item": `https://mnlegal.net/insights/${post.slug}` }
+                { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.mnlegal.net" },
+                { "@type": "ListItem", "position": 2, "name": "Insights", "item": "https://www.mnlegal.net/insights" },
+                { "@type": "ListItem", "position": 3, "name": post.category, "item": `https://www.mnlegal.net/insights?category=${post.category.toLowerCase().replace(/\s+/g, '-')}` },
+                { "@type": "ListItem", "position": 4, "name": post.title, "item": `https://www.mnlegal.net/insights/${post.slug}` }
               ]
             }
           ])

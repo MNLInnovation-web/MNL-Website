@@ -112,7 +112,7 @@ export const teamMembers: TeamMember[] = [
     phone: '+254 753 028 437 / +254 700 325 089',
     credentials: [
       'Advocate of the High Court of Kenya',
-      'LL.B (Hons), Jomo Kenyatta University of Agriculture and Technology',
+      'LL.B (Hons), The Catholic University of Eastern Africa',
       'Postgraduate Diploma, Kenya School of Law'
     ],
     bio: "Husna is a Senior Associate in the Corporate & Real Estate practice group. She counsels local real estate developers, foreign venture partners, and corporate boards on complex land-use planning, sectional properties, and capital structure advisory. She also serves on the Summit Leadership Operations team, coordinating key logistics and planning for the firm's flagship event.",

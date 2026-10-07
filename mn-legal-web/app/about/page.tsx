@@ -2,8 +2,10 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import Navbar from '../components/Navbar';
-import AboutSection from '../components/AboutSection';
+import AboutStats from '../components/AboutStats';
+import AboutReveal from '../components/AboutReveal';
 import CoreValues from '../components/CoreValues';
+import TeamSection from '../components/TeamSection';
 import Footer from '../components/Footer';
 import UIExtras from '../components/UIExtras';
 import ContactSection from '../components/ContactSection';
@@ -51,65 +53,115 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Custom SEO Header / Hero */}
-      <section className="py-20 px-6 md:px-16 bg-[var(--mn-cream)]">
+      <AboutReveal />
+
+      {/* 1. Hero / positioning */}
+      <section className="py-20 md:py-28 px-6 md:px-16 bg-[var(--mn-cream)]">
         <div className="max-w-[1400px] mx-auto">
-          <div className="max-w-[900px]">
-            <span className="text-[var(--mn-burgundy)] text-[11px] font-semibold uppercase tracking-[0.3em] mb-6 block">
-              MN Advocates LLP
-            </span>
-            <h1 className="text-[clamp(40px,7vw,80px)] font-display italic text-[var(--heading-primary)] leading-[1.1] mb-8">
+          <div className="max-w-[980px]">
+            <div className="inline-flex items-center gap-3 mb-6">
+              <span className="w-8 h-[1px] bg-[var(--mn-burgundy)]" />
+              <span className="text-[var(--mn-burgundy)] text-[11px] font-bold uppercase tracking-[0.25em]">
+                MN Advocates LLP · Nairobi
+              </span>
+            </div>
+            <h1 className="text-[clamp(44px,7vw,84px)] font-display italic text-[var(--heading-primary)] leading-[1.08] mb-8">
               Precision. Counsel. Resolve.
             </h1>
-            <p className="text-[18px] md:text-[22px] text-[var(--text-primary)] font-body leading-relaxed max-w-[700px] opacity-90">
+            <p className="text-[18px] md:text-[22px] text-[var(--text-primary)] font-body leading-[1.75] max-w-[760px] opacity-90">
               We are a modern, dynamic East African law firm designed to help innovators, corporations, and scaling platforms navigate complex commercial landscapes with absolute confidence.
             </p>
+            <div className="mt-10 pt-8 border-t border-[rgba(26,39,68,0.12)] flex flex-wrap gap-x-10 gap-y-3 text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--heading-primary)]">
+              <span>Advocates of the High Court of Kenya</span>
+              <span>Data Protection Act 2019</span>
+              <span>Nairobi · London</span>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Reusing Home Components */}
-      <AboutSection />
-
-      {/* Narrative Expansion Section */}
-      <section className="bg-white py-24 px-6 md:px-16 border-t border-b border-[rgba(26,39,68,0.05)]">
-        <div className="max-w-[1400px] mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-            <div>
-              <h2 className="text-[28px] font-display text-[var(--heading-primary)] border-b-2 border-[var(--mn-burgundy)] pb-3 mb-6">
-                Our Mission & Vision
-              </h2>
-              <p className="text-[16px] leading-relaxed text-neutral-600 font-body font-medium mb-6">
+      {/* 2. Ethos / philosophy + differentiators */}
+      <section className="bg-white py-24 px-6 md:px-16 border-b border-[rgba(26,39,68,0.06)]">
+        <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+          <div className="lg:col-span-5" data-reveal>
+            <span className="text-[var(--mn-burgundy)] text-[11px] font-bold uppercase tracking-[0.25em] mb-4 block">
+              Our Mission &amp; Vision
+            </span>
+            <h2 className="font-display italic text-[clamp(32px,4vw,46px)] text-[var(--heading-primary)] leading-[1.15] mb-8">
+              Advocacy, rebuilt for a digital economy
+            </h2>
+            <div className="space-y-6 text-[16px] leading-[1.85] text-[var(--text-primary)] font-body max-w-[740px]">
+              <p>
                 Our vision is to redefine legal services in East Africa by integrating cutting-edge LegalTech with traditional advocacy. We believe legal advisory should be a partner in business growth, not just a defensive shield.
               </p>
-              <p className="text-[16px] leading-relaxed text-neutral-600 font-body font-medium">
+              <p>
                 Through deep expertise in emerging technologies, cybersecurity, data protection, and cross-border commercial frameworks, we guide our clients through complex regulatory terrains efficiently and flawlessly.
               </p>
             </div>
-            <div>
-              <h2 className="text-[28px] font-display text-[var(--heading-primary)] border-b-2 border-[var(--mn-burgundy)] pb-3 mb-6">
-                Why Partners Choose MN Legal
-              </h2>
-              <ul className="space-y-4 font-body font-medium text-neutral-600 text-[15px]">
-                <li className="flex gap-3">
-                  <span className="w-1.5 h-1.5 bg-[var(--mn-burgundy)] shrink-0 mt-2"></span>
-                  <span><strong>Elite Specialized Expertise:</strong> Pioneering legal counsel in Data Protection Act 2019 compliance, AI governance, and digital finance.</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="w-1.5 h-1.5 bg-[var(--mn-burgundy)] shrink-0 mt-2"></span>
-                  <span><strong>Business-First Advisory:</strong> Aligning legal strategy with your capitalization, product timelines, and commercial goals.</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="w-1.5 h-1.5 bg-[var(--mn-burgundy)] shrink-0 mt-2"></span>
-                  <span><strong>Global Standards:</strong> A stellar team with local roots and international certifications, ensuring sophisticated local execution.</span>
-                </li>
-              </ul>
+          </div>
+
+          <div className="lg:col-span-7 bg-[var(--mn-cream)] border border-[var(--mn-cream-dark)] p-8 md:p-12" data-reveal>
+            <span className="text-[var(--mn-burgundy)] text-[11px] font-bold uppercase tracking-[0.25em] mb-4 block">
+              Why Partners Choose MN Legal
+            </span>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-10 mt-8">
+              {[
+                ['Elite Specialized Expertise', 'Pioneering legal counsel in Data Protection Act 2019 compliance, AI governance, and digital finance.'],
+                ['Business-First Advisory', 'Aligning legal strategy with your capitalization, product timelines, and commercial goals.'],
+                ['Global Standards', 'A team with local roots and international certifications, ensuring sophisticated local execution.'],
+                ['Cross-Border Reach', 'Nairobi counsel complemented by London-based Of Counsel for international arbitration and maritime matters.'],
+              ].map(([title, body]) => (
+                <div key={title} className="group border-l-2 border-[var(--mn-gray-light)] hover:border-[var(--mn-burgundy)] pl-5 transition-colors duration-300">
+                  <h3 className="font-display text-[20px] font-semibold text-[var(--heading-primary)] mb-2 group-hover:text-[var(--mn-burgundy)] transition-colors duration-300">
+                    {title}
+                  </h3>
+                  <p className="text-[14px] leading-relaxed text-[var(--text-secondary)]">{body}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
+      {/* 3. Stats */}
+      <section className="bg-[var(--mn-navy)] py-20 px-6 md:px-16">
+        <div className="max-w-[1400px] mx-auto" data-reveal>
+          <AboutStats />
+        </div>
+      </section>
+
+      {/* 4. Values */}
       <CoreValues />
+
+      {/* 5. Leadership */}
+      <TeamSection />
+
+      {/* 6. Admissions & affiliations (drawn from team credentials) */}
+      <section className="bg-[var(--mn-navy)] py-24 px-6 md:px-16">
+        <div className="max-w-[1400px] mx-auto">
+          <div className="mb-14" data-reveal>
+            <span className="text-[var(--mn-burgundy)] text-[11px] font-bold uppercase tracking-[0.25em] mb-4 block">
+              Standing &amp; Affiliations
+            </span>
+            <h2 className="font-display italic text-[clamp(32px,4vw,46px)] text-white leading-[1.15]">
+              Admissions &amp; Bar Standing
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[1px] bg-white/10 border border-white/10" data-reveal>
+            {[
+              ['High Court of Kenya', 'Advocates admitted to practise before the High Court of Kenya.'],
+              ['Law Society of Kenya', 'Members of the statutory professional body for advocates.'],
+              ['Chartered Institute of Arbitrators', 'CIArb-qualified practitioners in domestic and international arbitration.'],
+              ['Senior Courts of England & Wales', 'London-based Of Counsel admitted as a Solicitor.'],
+            ].map(([name, desc]) => (
+              <div key={name} className="bg-[var(--mn-navy)] p-8 hover:bg-[#1d2b4c] transition-colors duration-300">
+                <h3 className="font-display text-[20px] text-white font-semibold mb-3">{name}</h3>
+                <p className="text-[13px] text-white/60 leading-relaxed">{desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <ContactSection
         defaultMatterType="Other"
